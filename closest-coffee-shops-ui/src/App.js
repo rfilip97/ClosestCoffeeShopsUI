@@ -7,7 +7,7 @@ function App() {
   const [shops, setShops] = useState([]);
 
   useEffect(() => {
-    const loadPost = async () => {
+    const loadPost = () => {
       getNearestShops({ x: 1, y: 1 }).then(cshops => { setShops(cshops) });
     }
     loadPost();
