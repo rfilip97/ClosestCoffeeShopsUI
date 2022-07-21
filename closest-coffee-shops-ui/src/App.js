@@ -8,7 +8,7 @@ function App() {
 
   useEffect(() => {
     const loadPost = () => {
-      getNearestShops({ x: 1, y: 1 }).then(cshops => { setShops(cshops) });
+      getNearestShops({ x: 1, y: 1 }).then(setShops);
     }
     loadPost();
   }, []);
