@@ -2,6 +2,7 @@ import './App.css';
 
 import { getNearestShops } from "./services/closestCoffeeShops/app.js";
 import React, { useState, useEffect } from 'react'
+import Map from "./components/CanvasComponent"
 
 function App() {
   const [shops, setShops] = useState([]);
@@ -15,16 +16,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Coffee shops:
-        </p>
-        <ul>
-          {shops.map(item => {
-            return <li>{item.name}</li>;
-          })}
-        </ul>
-      </header>
+      <div>
+        <Map/>
+      </div>
     </div>
   );
 }
