@@ -21,7 +21,7 @@ function App() {
         </p>
         <ul>
           {shops.map(item => {
-            return <li>{item.name}</li>;
+            return <li key={`coffeshopitem-${item.name}`}>{item.name}</li>;
           })}
         </ul>
       </header>
