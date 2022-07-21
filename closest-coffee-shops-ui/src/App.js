@@ -1,22 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { getNearestShops } from "./services/closestCoffeeShops/app.js";
+import React, { useState, useEffect } from 'react'
+
 function App() {
+  const [shops, setShops] = useState([]);
+
+  useEffect(() => {
+    const loadPost = async () => {
+      getNearestShops({ x: 1, y: 1 }).then(cshops => { setShops(cshops) });
+    }
+    loadPost();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Coffee shops:
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ul>
+          {shops.map(item => {
+            return <li>{item.name}</li>;
+          })}
+        </ul>
       </header>
     </div>
   );
