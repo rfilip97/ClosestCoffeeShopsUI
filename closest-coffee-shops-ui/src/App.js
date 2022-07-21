@@ -8,8 +8,8 @@ function App() {
   const [shops, setShops] = useState([]);
 
   useEffect(() => {
-    const loadPost = async () => {
-      getNearestShops({ x: 1, y: 1 }).then(cshops => { setShops(cshops) });
+    const loadPost = () => {
+      getNearestShops({ x: 1, y: 1 }).then(setShops);
     }
     loadPost();
   }, []);
