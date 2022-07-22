@@ -1,8 +1,9 @@
 import './App.css';
 
 import { getNearestShops } from "./services/closestCoffeeShops/app.js";
-import React, { useState, useEffect } from 'react'
+import CoffeeShop from './components/DrawCoffeeShopcomponent';
 import Map from "./components/CanvasComponent"
+import React, { useState, useEffect } from 'react'
 
 function App() {
   const [shops, setShops] = useState([]);
@@ -18,6 +19,9 @@ function App() {
     <div className="App">
       <div>
         <Map/>
+          {shops.map(item => {
+            return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y}/>
+          })}
       </div>
     </div>
   );
