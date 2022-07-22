@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     const loadPost = () => {
-      getNearestShops({ x: 1, y: 1 }).then(setShops);
+      getNearestShops({ x: 1, y: 1 }, -1).then(setShops);
     }
     loadPost();
   }, []);
