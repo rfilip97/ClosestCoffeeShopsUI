@@ -9,16 +9,26 @@ import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
 
 function App() {
   const [shops, setShops] = useState([]);
+  const [point, setPoint] = useState(() => {
+    return {x: 1, y: 1};
+  });
 
   useEffect(() => {
     const loadPost = () => {
-      getNearestShops({ x: 1, y: 1 }, RETRIEVE_ALL_TOKEN).then(setShops);
+      getNearestShops(point, RETRIEVE_ALL_TOKEN).then(cshops => {
+        cshops.forEach(cshop => {
+          cshop.highlighted = false;
+        });
+        setShops(cshops);
+      }
+      );
     }
     loadPost();
-  }, []);
+  }, [point]);
 
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [, setGlobalCoords] = useState({ x: 0, y: 0 });
+  const [shouldHighlight, setShouldHighlight] = useState(coords.x, coords.y);
 
   useEffect(() => {
     const handleWindowMouseMove = event => {
@@ -27,10 +37,16 @@ function App() {
         y: event.screenY,
       });
     };
-    window.addEventListener('mousemove', handleWindowMouseMove);
 
+    const handleWindowMouseDown = event => {
+      setPoint({x: coords.x, y: coords.y});
+      setShouldHighlight(true);
+    };
+    window.addEventListener('mousemove', handleWindowMouseMove);
+    window.addEventListener('mousedown', handleWindowMouseDown);
     return () => {
       window.removeEventListener('mousemove', handleWindowMouseMove);
+      window.removeEventListener('mousemove', handleWindowMouseDown);
     };
   }, []);
 
@@ -45,18 +61,22 @@ function App() {
     });
   };
 
+  const shouldBeHighlighted = (index) => {
+    return (index < 3) && shouldHighlight;
+  };
+
   return (
-    <div className="App" style={{padding: '2px', display: 'flex'}}>
+    <div className="App" style={{ padding: '2px', display: 'flex' }}>
       <div onMouseMove={handleMouseMove}>
         <Map />
-        {shops.map(item => {
-          return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} />
+        { shops.map((item, index) => {
+          return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} highlighted={shouldBeHighlighted(index)}/>
         })}
       </div>
-      <div style={{padding: '25px', fontSize: '50px'}}>
-      <h2>
-        Coords: {coords.x} {coords.y}
-      </h2>
+      <div style={{ padding: '25px', fontSize: '50px' }}>
+        <h2>
+          Coords: {coords.x} {coords.y}
+        </h2>
       </div>
     </div>
   );
