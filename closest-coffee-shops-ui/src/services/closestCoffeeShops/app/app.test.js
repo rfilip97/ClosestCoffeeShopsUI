@@ -1,9 +1,9 @@
 import { getNearestShops } from "./app";
-import DeltaCoffeeShop from "./deltaCoffeeShop";
-import DeltaCoffeeShopList from "./deltaCoffeeShopList";
-import SortedDeltaCoffeShopList from "./sortedDeltaCoffeeShopList";
-import errorCodes from "./errorcodes.js";
-import { ERROR_TOKEN, errorResponse } from "./utils.js";
+import DeltaCoffeeShop from "../coffeeShopsComponents/deltaCoffeeShop";
+import DeltaCoffeeShopList from "../coffeeShopsComponents/deltaCoffeeShopList";
+import SortedDeltaCoffeShopList from "../coffeeShopsComponents/sortedDeltaCoffeeShopList";
+import errorCodes from "../utils/errorcodes.js";
+import { ERROR_TOKEN, errorResponse } from "../utils/utils.js";
 
 describe("App", () => {
   it("should return an array when the input is valid", async () => {

@@ -1,6 +1,6 @@
 import './App.css';
 
-import { getNearestShops } from "./services/closestCoffeeShops/app.js";
+import { getNearestShops } from "./services/closestCoffeeShops/app/app.js";
 import CoffeeShop from './components/DrawCoffeeShopcomponent';
 import Map from "./components/CanvasComponent"
 import React, { useState, useEffect } from 'react'

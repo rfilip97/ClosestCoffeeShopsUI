@@ -1,7 +1,7 @@
-import fetchCoffeeShops from "./dataFetcher.js";
-import errorCodes from "./errorcodes.js";
-import { errorResponse } from "./utils.js";
-import SortedDeltaCoffeeShopList from "./sortedDeltaCoffeeShopList.js";
+import fetchCoffeeShops from "../dataFetcher/dataFetcher.js";
+import errorCodes from "../utils/errorcodes.js";
+import { errorResponse } from "../utils/utils.js";
+import SortedDeltaCoffeeShopList from "../coffeeShopsComponents/sortedDeltaCoffeeShopList.js";
 
 /**
  * Get the 3 closest coffee shops relative to current position
