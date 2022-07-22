@@ -33,8 +33,8 @@ class SortedDeltaCoffeShopList extends DeltaCoffeeShopList {
    * @returns An array with the closest N coffee shops, containing the name and the delta value
    */
   getNClosestCoffeShops(n) {
-    // If received N is too large, return all coffee shops
-    if (n >= this._deltaCoffeeShops.length) {
+    // If received N is too large or -1, return all coffee shops
+    if (n >= this._deltaCoffeeShops.length || n === -1) {
       n = this._deltaCoffeeShops.length;
     }
 
