@@ -1,3 +1,4 @@
+import { RETRIEVE_ALL_TOKEN } from "../utils/utils.js";
 import DeltaCoffeeShopList from "./deltaCoffeeShopList.js";
 
 /**
@@ -34,7 +35,7 @@ class SortedDeltaCoffeShopList extends DeltaCoffeeShopList {
    */
   getNClosestCoffeShops(n) {
     // If received N is too large or -1, return all coffee shops
-    if (n >= this._deltaCoffeeShops.length || n === -1) {
+    if (n >= this._deltaCoffeeShops.length || n === RETRIEVE_ALL_TOKEN) {
       n = this._deltaCoffeeShops.length;
     }
 
