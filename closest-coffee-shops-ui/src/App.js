@@ -18,12 +18,10 @@ function App() {
 
   return (
     <div className="App">
-      <div>
         <Map />
         {shops.map(item => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} />
         })}
-      </div>
     </div>
   );
 }
