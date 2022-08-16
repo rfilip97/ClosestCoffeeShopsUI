@@ -9,9 +9,7 @@ import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
 
 function App() {
   const [shops, setShops] = useState([]);
-  const [point, setPoint] = useState(() => {
-    return { x: 1, y: 1 };
-  });
+  const [point, setPoint] = useState(() => ({ x: 1, y: 1 }));
 
   useEffect(() => {
     const loadPost = async () => {
