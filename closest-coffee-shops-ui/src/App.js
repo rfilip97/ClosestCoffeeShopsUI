@@ -11,10 +11,12 @@ function App() {
   const [shops, setShops] = useState([]);
   const [point, setPoint] = useState(() => ({ x: 1, y: 1 }));
 
+  let getClosestCoffeShops = null;
+
   useEffect(() => {
     const loadShops = async () => {
-      const getClosestCoffeShops = await coffeeShops(point);
-      const cshops = getClosestCoffeShops(RETRIEVE_ALL_TOKEN)
+      getClosestCoffeShops = await coffeeShops();
+      const cshops = getClosestCoffeShops(RETRIEVE_ALL_TOKEN, point)
       for (let cs of cshops) {
         cs.highlighted = false;
       }
