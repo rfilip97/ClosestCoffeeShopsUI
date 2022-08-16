@@ -24,7 +24,7 @@ function App() {
     }
 
     loadPost();
-  }, [point]);
+  }, []);
 
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [, setGlobalCoords] = useState({ x: 0, y: 0 });
