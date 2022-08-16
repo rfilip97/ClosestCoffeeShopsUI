@@ -34,13 +34,13 @@ function App() {
         y: event.screenY,
       });
     };
-
     const handleWindowMouseDown = event => {
       setPoint({ x: coords.x, y: coords.y });
       setShouldHighlight(true);
     };
     window.addEventListener('mousemove', handleWindowMouseMove);
     window.addEventListener('mousedown', handleWindowMouseDown);
+
     return () => {
       window.removeEventListener('mousemove', handleWindowMouseMove);
       window.removeEventListener('mousemove', handleWindowMouseDown);
