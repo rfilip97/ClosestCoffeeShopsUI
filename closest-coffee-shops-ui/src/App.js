@@ -12,7 +12,7 @@ function App() {
   const [point, setPoint] = useState(() => ({ x: 1, y: 1 }));
 
   useEffect(() => {
-    const loadPost = async () => {
+    const loadShops = async () => {
       const getClosestCoffeShops = await coffeeShops(point);
       const cshops = getClosestCoffeShops(RETRIEVE_ALL_TOKEN)
       for (let cs of cshops) {
@@ -20,8 +20,7 @@ function App() {
       }
       setShops(cshops);
     }
-
-    loadPost();
+    loadShops();
   }, []);
 
   const [coords, setCoords] = useState({ x: 0, y: 0 });
