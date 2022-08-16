@@ -1,6 +1,6 @@
 import './App.css';
 
-import { getNearestShops } from "./services/closestCoffeeShops/app/app.js";
+import coffeeShops from './services/closestCoffeeShops/coffeeShopsComponents/coffeeShops';
 import { RETRIEVE_ALL_TOKEN } from './services/closestCoffeeShops/utils/utils'
 import CoffeeShop from './components/DrawCoffeeShopcomponent';
 import Map from "./components/CanvasComponent"
@@ -10,19 +10,19 @@ import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
 function App() {
   const [shops, setShops] = useState([]);
   const [point, setPoint] = useState(() => {
-    return {x: 1, y: 1};
+    return { x: 1, y: 1 };
   });
 
   useEffect(() => {
-    const loadPost = () => {
-      getNearestShops(point, RETRIEVE_ALL_TOKEN).then(cshops => {
-        cshops.forEach(cshop => {
-          cshop.highlighted = false;
-        });
-        setShops(cshops);
+    const loadPost = async () => {
+      const getClosestCoffeShops = await coffeeShops(point);
+      const cshops = getClosestCoffeShops(RETRIEVE_ALL_TOKEN)
+      for (let cs of cshops) {
+        cs.highlighted = false;
       }
-      );
+      setShops(cshops);
     }
+
     loadPost();
   }, [point]);
 
@@ -39,7 +39,7 @@ function App() {
     };
 
     const handleWindowMouseDown = event => {
-      setPoint({x: coords.x, y: coords.y});
+      setPoint({ x: coords.x, y: coords.y });
       setShouldHighlight(true);
     };
     window.addEventListener('mousemove', handleWindowMouseMove);
@@ -69,8 +69,8 @@ function App() {
     <div className="App" style={{ padding: '2px', display: 'flex' }}>
       <div onMouseMove={handleMouseMove}>
         <Map />
-        { shops.map((item, index) => {
-          return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} highlighted={shouldBeHighlighted(index)}/>
+        {shops.map((item, index) => {
+          return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} highlighted={shouldBeHighlighted(index)} />
         })}
       </div>
       <div style={{ padding: '25px', fontSize: '50px' }}>
