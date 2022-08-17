@@ -3,6 +3,7 @@ import './App.css';
 import coffeeShops from './services/closestCoffeeShops/coffeeShopsComponents/coffeeShops';
 import { RETRIEVE_ALL_TOKEN } from './services/closestCoffeeShops/utils/utils'
 import CoffeeShop from './components/DrawCoffeeShopcomponent';
+import Pointer from './components/DrawPointerComponent';
 import Map from "./components/CanvasComponent"
 import React, { useState, useEffect, useRef } from 'react'
 import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
@@ -88,6 +89,7 @@ function App() {
         {shops.map((item, index) => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} highlighted={shouldBeHighlighted(index)} />
         })}
+        <Pointer key={`pointer`} x={selectedPoint.x} y={selectedPoint.y} highlighted={shouldHighlight} />
       </div>
       <div style={{ padding: '25px', fontSize: '50px' }}>
         <h2>

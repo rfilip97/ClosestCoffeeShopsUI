@@ -9,6 +9,11 @@
   position: absolute;
 }
 
+.Pointer {
+    position: absolute;
+    transform: scale(2.5);
+}
+
 .-Highlighted {
     border: red 1px solid;
     padding: 20px;
