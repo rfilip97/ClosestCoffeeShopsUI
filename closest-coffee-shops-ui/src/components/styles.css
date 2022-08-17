@@ -26,7 +26,6 @@
 
 .-Highlighted {
     border: red 1px solid;
-    padding: 20px;
     border-radius: 50%;
     transform: scale(2.5);
   }
