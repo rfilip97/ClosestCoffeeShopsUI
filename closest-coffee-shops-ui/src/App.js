@@ -4,23 +4,19 @@ import coffeeShops from './services/closestCoffeeShops/coffeeShopsComponents/cof
 import { RETRIEVE_ALL_TOKEN } from './services/closestCoffeeShops/utils/utils'
 import CoffeeShop from './components/DrawCoffeeShopcomponent';
 import Map from "./components/CanvasComponent"
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
 
 function App() {
   const [shops, setShops] = useState([]);
   const [point, setPoint] = useState(() => ({ x: 1, y: 1 }));
 
-  let getClosestCoffeShops = null;
+  const getClosestCoffeShops = useRef(null);
 
   useEffect(() => {
     const loadShops = async () => {
-      getClosestCoffeShops = await coffeeShops();
-      const cshops = getClosestCoffeShops(RETRIEVE_ALL_TOKEN, point)
-      for (let cs of cshops) {
-        cs.highlighted = false;
-      }
-      setShops(cshops);
+      getClosestCoffeShops.current = await coffeeShops();
+      updateCoffeeShops();
     }
     loadShops();
   }, []);
@@ -49,6 +45,10 @@ function App() {
     };
   }, [coords.x, coords.y]);
 
+  useEffect(() => {
+    updateCoffeeShops();
+  }, [point]);
+
   const handleMouseMove = event => {
     const absX = event.clientX - event.target.offsetLeft;
     const absY = event.clientY - event.target.offsetTop;
@@ -62,6 +62,17 @@ function App() {
 
   const shouldBeHighlighted = (index) => {
     return (index < 3) && shouldHighlight;
+  };
+
+  const updateCoffeeShops = () => {
+    if (getClosestCoffeShops.current === null) {
+      return;
+    }
+    const cshops = getClosestCoffeShops.current(RETRIEVE_ALL_TOKEN, point)
+    for (let cs of cshops) {
+      cs.highlighted = false;
+    }
+    setShops(cshops);
   };
 
   return (
