@@ -90,6 +90,7 @@ function App() {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} highlighted={shouldBeHighlighted(index)} />
         })}
         <Pointer key={`pointer`} x={selectedPoint.x} y={selectedPoint.y} highlighted={shouldHighlight} />
+        <Map invisible="true"/>
       </div>
       <div style={{ padding: '25px', fontSize: '50px' }}>
         <h2>
