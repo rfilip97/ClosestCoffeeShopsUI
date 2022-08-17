@@ -5,15 +5,11 @@
  * @returns the translated values
  */
 export function translateMapCoordinates(x, y) {
-    const translateX = (coord) => {
+    const translateCoord = (coord) => {
         return (parseInt(coord) + 180) * 10;
     };
 
-    const translateY = (coord) => {
-        return (parseInt(coord) + 180) * 10;
-    };
-
-    return [translateX(x), translateY(y)];
+    return [translateCoord(x), translateCoord(y)];
 }
 
 /**
