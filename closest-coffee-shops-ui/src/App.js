@@ -57,14 +57,21 @@ function App() {
       return;
     }
     const cshops = getClosestCoffeShops.current(RETRIEVE_ALL_TOKEN, selectedPoint)
-    for (let cs of cshops) {
-      cs.highlighted = false;
-    }
     setShops(cshops);
   };
 
   const shouldBeHighlighted = (index) => {
     return (index < 3) && shouldHighlight;
+  };
+
+  const determineHighlightedShops = () => {
+    shops.map((item, index) => {
+      if (index < 3 && shouldHighlight) {
+        item.highlighted = true;
+      } else {
+        item.highlighted = false;
+      }
+    });
   };
 
   useEffect(() => {
@@ -79,6 +86,7 @@ function App() {
   }, [coords]);
 
   useEffect(() => {
+    determineHighlightedShops();
     updateCoffeeShops();
   }, [selectedPoint]);
 
@@ -87,10 +95,10 @@ function App() {
       <div onMouseMove={getMouseCoordinates}>
         <Map />
         {shops.map((item, index) => {
-          return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} highlighted={shouldBeHighlighted(index)} />
+          return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
         })}
         <Pointer key={`pointer`} x={selectedPoint.x} y={selectedPoint.y} highlighted={shouldHighlight} />
-        <Map invisible="true"/>
+        <Map invisible="true" />
       </div>
       <div style={{ padding: '25px', fontSize: '50px' }}>
         <h2>
