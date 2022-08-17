@@ -57,6 +57,8 @@ class SortedDeltaCoffeShopList extends DeltaCoffeeShopList {
       let coffeeShop = {
         name: slicedArray[i].name,
         delta: slicedArray[i].delta,
+        x: slicedArray[i].x,
+        y: slicedArray[i].y
       };
       closestCoffeeShops.push(coffeeShop);
     }

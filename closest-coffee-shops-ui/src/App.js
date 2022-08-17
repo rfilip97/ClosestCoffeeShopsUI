@@ -1,6 +1,8 @@
 import './App.css';
 
-import { getNearestShops } from "./services/closestCoffeeShops/app.js";
+import { getNearestShops } from "./services/closestCoffeeShops/app/app.js";
+import CoffeeShop from './components/DrawCoffeeShopcomponent';
+import Map from "./components/CanvasComponent"
 import React, { useState, useEffect } from 'react'
 
 function App() {
@@ -15,16 +17,12 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Coffee shops:
-        </p>
-        <ul>
+      <div>
+        <Map/>
           {shops.map(item => {
-            return <li key={`coffeshopitem-${item.name}`}>{item.name}</li>;
+            return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y}/>
           })}
-        </ul>
-      </header>
+      </div>
     </div>
   );
 }
