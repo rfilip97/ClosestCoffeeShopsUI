@@ -36,7 +36,7 @@ function App() {
         y: event.screenY,
       });
     };
-    const handleWindowMouseDown = event => {
+    const handleWindowMouseDown = () => {
       setPoint({ x: coords.x, y: coords.y });
       setShouldHighlight(true);
     };
@@ -47,7 +47,7 @@ function App() {
       window.removeEventListener('mousemove', handleWindowMouseMove);
       window.removeEventListener('mousemove', handleWindowMouseDown);
     };
-  }, []);
+  }, [coords.x, coords.y]);
 
   const handleMouseMove = event => {
     const absX = event.clientX - event.target.offsetLeft;
