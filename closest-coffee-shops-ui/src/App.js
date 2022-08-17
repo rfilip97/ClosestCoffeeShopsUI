@@ -9,23 +9,18 @@ import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
 
 function App() {
   const [shops, setShops] = useState([]);
-  const [point, setPoint] = useState(() => ({ x: 1, y: 1 }));
-
-  const getClosestCoffeShops = useRef(null);
-
-  useEffect(() => {
-    const loadShops = async () => {
-      getClosestCoffeShops.current = await coffeeShops();
-      updateCoffeeShops();
-    }
-    loadShops();
-  }, []);
-
+  const [selectedPoint, setPoint] = useState(() => ({ x: 1, y: 1 }));
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [, setGlobalCoords] = useState({ x: 0, y: 0 });
-  const [shouldHighlight, setShouldHighlight] = useState(coords.x, coords.y);
+  const [shouldHighlight, setShouldHighlight] = useState(false);
+  const getClosestCoffeShops = useRef(null);
 
-  useEffect(() => {
+  async function init() {
+    getClosestCoffeShops.current = await coffeeShops();
+    updateCoffeeShops();
+  }
+
+  function handleMouseEvents(coords) {
     const handleWindowMouseMove = event => {
       setGlobalCoords({
         x: event.screenX,
@@ -41,15 +36,11 @@ function App() {
 
     return () => {
       window.removeEventListener('mousemove', handleWindowMouseMove);
-      window.removeEventListener('mousemove', handleWindowMouseDown);
+      window.removeEventListener('mousedown', handleWindowMouseDown);
     };
-  }, [coords.x, coords.y]);
+  }
 
-  useEffect(() => {
-    updateCoffeeShops();
-  }, [point]);
-
-  const handleMouseMove = event => {
+  const getMouseCoordinates = event => {
     const absX = event.clientX - event.target.offsetLeft;
     const absY = event.clientY - event.target.offsetTop;
     const [translatedX, translatedY] = reverseTranslateMapCoordinates(absX, absY);
@@ -60,24 +51,39 @@ function App() {
     });
   };
 
-  const shouldBeHighlighted = (index) => {
-    return (index < 3) && shouldHighlight;
-  };
-
   const updateCoffeeShops = () => {
     if (getClosestCoffeShops.current === null) {
       return;
     }
-    const cshops = getClosestCoffeShops.current(RETRIEVE_ALL_TOKEN, point)
+    const cshops = getClosestCoffeShops.current(RETRIEVE_ALL_TOKEN, selectedPoint)
     for (let cs of cshops) {
       cs.highlighted = false;
     }
     setShops(cshops);
   };
 
+  const shouldBeHighlighted = (index) => {
+    return (index < 3) && shouldHighlight;
+  };
+
+  useEffect(() => {
+    const initShops = async () => {
+      await init();
+    }
+    initShops().catch(console.error);
+  }, [])
+
+  useEffect(() => {
+    handleMouseEvents(coords);
+  }, [coords]);
+
+  useEffect(() => {
+    updateCoffeeShops();
+  }, [selectedPoint]);
+
   return (
     <div className="App" style={{ padding: '2px', display: 'flex' }}>
-      <div onMouseMove={handleMouseMove}>
+      <div onMouseMove={getMouseCoordinates}>
         <Map />
         {shops.map((item, index) => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} highlighted={shouldBeHighlighted(index)} />
