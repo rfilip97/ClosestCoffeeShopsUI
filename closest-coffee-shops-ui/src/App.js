@@ -44,11 +44,10 @@ function App() {
   };
 
   const updateCoffeeShops = () => {
-    if (getClosestCoffeShops.current === null) {
-      return;
+    if (getClosestCoffeShops.current) {
+      const cshops = getClosestCoffeShops.current(RETRIEVE_ALL_TOKEN, selectedPoint)
+      setShops(cshops);
     }
-    const cshops = getClosestCoffeShops.current(RETRIEVE_ALL_TOKEN, selectedPoint)
-    setShops(cshops);
   };
 
   const determineHighlightedShops = () => {
