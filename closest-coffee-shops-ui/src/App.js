@@ -10,7 +10,7 @@ import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
 
 function App() {
   const [shops, setShops] = useState([]);
-  const [selectedPoint, setPoint] = useState({ x: 1, y: 1 });
+  const [selectedPoint, setSelectedPoint] = useState({ x: 1, y: 1 });
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [shouldHighlight, setShouldHighlight] = useState(false);
   const getClosestCoffeShops = useRef(null);
@@ -22,7 +22,7 @@ function App() {
 
   function handleMouseEvents(coords) {
     const handleWindowMouseDown = () => {
-      setPoint({ x: coords.x, y: coords.y });
+      setSelectedPoint({ x: coords.x, y: coords.y });
       setShouldHighlight(true);
     };
     window.addEventListener('mousedown', handleWindowMouseDown);
