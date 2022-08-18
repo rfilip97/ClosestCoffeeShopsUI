@@ -77,7 +77,7 @@ function App() {
     <div className="App">
       <div onMouseMove={getMouseCoordinates}>
         <Map />
-        {shops.map((item, index) => {
+        {shops.map((item) => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
         })}
         <Pointer key={`pointer`} x={selectedPoint.x} y={selectedPoint.y} highlighted={shouldHighlight} />
