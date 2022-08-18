@@ -13,7 +13,7 @@ function Pointer(props) {
     }
     return (
         <img src={pointerImg}
-            className={"Pointer"}
+            className="pointer"
             alt="Pointer"
             style={initialStyle}>
         </img>)

@@ -9,7 +9,7 @@ function CoffeeShop(props) {
     const elementStyle = { top: `${newy}px`, left: `${newx}px`, height: `${shopSizePx}px`, width: `${shopSizePx}px` };
     return (
         <img src={coffeeShopImg}
-            className={`Shop ${props.shop.highlighted ? "-Highlighted" : ""}`}
+            className={`shop ${props.shop.highlighted ? "-highlighted" : ""}`}
             alt="Coffee shop"
             style={elementStyle}>
         </img>)

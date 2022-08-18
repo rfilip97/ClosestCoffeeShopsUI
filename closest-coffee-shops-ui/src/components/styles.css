@@ -1,4 +1,4 @@
-.Map {
+.map {
     height: 3600px;
     width: 3600px;
     margin: auto;
@@ -6,25 +6,25 @@
     z-index: 1;
   }
 
-.Map.-Invisible {
+.map.-invisible {
   opacity: 0.0;
   position: absolute;
   z-index: 5;
   left: 0;
 }
 
-.Shop {
+.shop {
   position: absolute;
   z-index: 2;
 }
 
-.Pointer {
+.pointer {
     position: absolute;
     transform: scale(5);
     z-index: 3;
 }
 
-.Shop.-Highlighted {
+.shop.-highlighted {
     border: red 1px solid;
     border-radius: 50%;
     transform: scale(2.5);
