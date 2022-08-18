@@ -17,7 +17,8 @@ function App() {
 
   async function displayInitialCoffeeShops() {
     getClosestCoffeShops.current = await coffeeShops();
-    updateCoffeeShops();
+    const cshops = updateCoffeeShops();
+    setShops(cshops);
   }
 
   function handleMouseEvents(coords) {
@@ -46,18 +47,22 @@ function App() {
   const updateCoffeeShops = () => {
     if (getClosestCoffeShops.current) {
       const cshops = getClosestCoffeShops.current(RETRIEVE_ALL_TOKEN, selectedPoint)
-      setShops(cshops);
+      return cshops;
     }
   };
 
-  const determineHighlightedShops = () => {
-    shops.map((item, index) => {
-      if (index < 3 && shouldHighlight) {
-        item.highlighted = true;
-      } else {
-        item.highlighted = false;
-      }
-    });
+  const determineHighlightedShops = shops => {
+    if(shops) {
+      const cshops = shops.map((item, index) => {
+        if (index < 3 && shouldHighlight) {
+          return {...item, highlighted: true};
+        }
+
+        return {...item, highlighted: false};
+      });
+
+    setShops(cshops);
+    }
   };
 
   useEffect(() => {
@@ -69,8 +74,8 @@ function App() {
   }, [coords]);
 
   useEffect(() => {
-    determineHighlightedShops();
-    updateCoffeeShops();
+    const cshops = updateCoffeeShops();
+    determineHighlightedShops(cshops);
   }, [selectedPoint]);
 
   return (
