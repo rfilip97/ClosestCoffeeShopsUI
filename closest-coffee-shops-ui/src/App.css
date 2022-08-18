@@ -1,0 +1,9 @@
+.App {
+  padding: 2px;
+  display: flex;
+}
+
+.CoordinatesContainer {
+  padding: 25px;
+  font-size: 50px;
+}

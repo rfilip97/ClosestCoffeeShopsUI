@@ -74,7 +74,7 @@ function App() {
   }, [selectedPoint]);
 
   return (
-    <div className="App" style={{ padding: '2px', display: 'flex' }}>
+    <div className="App">
       <div onMouseMove={getMouseCoordinates}>
         <Map />
         {shops.map((item, index) => {
@@ -83,7 +83,7 @@ function App() {
         <Pointer key={`pointer`} x={selectedPoint.x} y={selectedPoint.y} highlighted={shouldHighlight} />
         <Map invisible="true" />
       </div>
-      <div style={{ padding: '25px', fontSize: '50px' }}>
+      <div className="CoordinatesContainer">
         <h2>
           Coords: {coords.x} {coords.y}
         </h2>
