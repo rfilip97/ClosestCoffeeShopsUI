@@ -36,7 +36,6 @@ export default async function coffeeShops() {
      * @returns delta value, rounded to four decimals
      */
     function calculateDelta(coffeeShop, currentPosition) {
-
         const delta = Math.sqrt(
             Math.pow(coffeeShop.x - currentPosition.x, 2) + Math.pow(coffeeShop.y - currentPosition.y, 2)
         );
