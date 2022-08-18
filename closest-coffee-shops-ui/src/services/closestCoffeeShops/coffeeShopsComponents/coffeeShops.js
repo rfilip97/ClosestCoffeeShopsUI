@@ -40,7 +40,7 @@ export default async function coffeeShops() {
             Math.pow(coffeeShop.x - currentPosition.x, 2) + Math.pow(coffeeShop.y - currentPosition.y, 2)
         );
 
-        return parseFloat(parseFloat(delta).toFixed(4));
+        return Math.round(delta * 10000) / 10000;
     }
 
     return getNClosestCoffeShops;
