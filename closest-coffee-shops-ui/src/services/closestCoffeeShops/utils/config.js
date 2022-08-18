@@ -1,0 +1,1 @@
+export const NUMBER_OF_SHOPS_TO_HIGHLIGHT = 3;

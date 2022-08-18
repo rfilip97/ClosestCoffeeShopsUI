@@ -2,6 +2,7 @@ import './App.css';
 
 import coffeeShops from './services/closestCoffeeShops/coffeeShopsComponents/coffeeShops';
 import { RETRIEVE_ALL_TOKEN } from './services/closestCoffeeShops/utils/utils'
+import { NUMBER_OF_SHOPS_TO_HIGHLIGHT } from './services/closestCoffeeShops/utils/config';
 import CoffeeShop from './components/DrawCoffeeShopcomponent';
 import Pointer from './components/DrawPointerComponent';
 import Map from "./components/CanvasComponent"
@@ -54,7 +55,7 @@ function App() {
   const determineHighlightedShops = shops => {
     if(shops) {
       const cshops = shops.map((item, index) => {
-        if (index < 3 && shouldHighlight) {
+        if (index < NUMBER_OF_SHOPS_TO_HIGHLIGHT && shouldHighlight) {
           return {...item, highlighted: true};
         }
 
