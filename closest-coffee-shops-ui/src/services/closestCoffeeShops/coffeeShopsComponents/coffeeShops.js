@@ -17,12 +17,7 @@ export default async function coffeeShops() {
      * @returns array of the first N coffee shops
      */
     function getNClosestCoffeShops(n, currentPosition) {
-        let sortedCoffeeShops = coffeeShops;
-
-        for (let coffeeShop of sortedCoffeeShops) {
-            coffeeShop.delta = calculateDelta(coffeeShop, currentPosition);
-        }
-
+        let sortedCoffeeShops = coffeeShops.map(cs => ({ ...cs, delta: calculateDelta(cs, currentPosition) }));
         sortedCoffeeShops.sort((cs1, cs2) => (cs1.delta - cs2.delta));
 
         return (n === RETRIEVE_ALL_TOKEN) ? sortedCoffeeShops : sortedCoffeeShops.slice(0, 3);
