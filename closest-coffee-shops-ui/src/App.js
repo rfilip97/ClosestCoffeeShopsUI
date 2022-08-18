@@ -15,7 +15,7 @@ function App() {
   const [shouldHighlight, setShouldHighlight] = useState(false);
   const getClosestCoffeShops = useRef(null);
 
-  async function init() {
+  async function displayInitialCoffeeShops() {
     getClosestCoffeShops.current = await coffeeShops();
     updateCoffeeShops();
   }
@@ -61,10 +61,7 @@ function App() {
   };
 
   useEffect(() => {
-    const initShops = async () => {
-      await init();
-    }
-    initShops().catch(console.error);
+    displayInitialCoffeeShops().catch(console.error);
   }, [])
 
   useEffect(() => {
