@@ -8,10 +8,7 @@ function Pointer(props) {
     const [newx, newy] = translateMapCoordinates(props.x, props.y);
     const initialStyle = { top: `${newy}px`, left: `${newx}px`, height: `${shopSizePx}px`, width: `${shopSizePx}px` };
 
-    if (!props.highlighted) {
-        return;
-    }
-    return (
+    return (props.highlighted &&
         <img src={pointerImg}
             className="pointer"
             alt="Pointer"
