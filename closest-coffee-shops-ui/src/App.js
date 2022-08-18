@@ -10,7 +10,7 @@ import { reverseTranslateMapCoordinates } from './utils/CoordinateConverter';
 
 function App() {
   const [shops, setShops] = useState([]);
-  const [selectedPoint, setPoint] = useState(() => ({ x: 1, y: 1 }));
+  const [selectedPoint, setPoint] = useState({ x: 1, y: 1 });
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [, setGlobalCoords] = useState({ x: 0, y: 0 });
   const [shouldHighlight, setShouldHighlight] = useState(false);
