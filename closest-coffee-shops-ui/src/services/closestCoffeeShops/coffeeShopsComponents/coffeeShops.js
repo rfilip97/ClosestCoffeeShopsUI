@@ -31,8 +31,9 @@ export default async function coffeeShops() {
      * @returns delta value, rounded to four decimals
      */
     function calculateDelta(coffeeShop, currentPosition) {
+        const squareOfDifference = (a, b) => Math.pow(a - b, 2);
         const delta = Math.sqrt(
-            Math.pow(coffeeShop.x - currentPosition.x, 2) + Math.pow(coffeeShop.y - currentPosition.y, 2)
+            squareOfDifference(coffeeShop.x - currentPosition.x) + squareOfDifference(coffeeShop.y - currentPosition.y)
         );
 
         return Math.round(delta * 10000) / 10000;
