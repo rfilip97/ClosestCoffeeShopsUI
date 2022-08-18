@@ -60,10 +60,6 @@ function App() {
     setShops(cshops);
   };
 
-  const shouldBeHighlighted = (index) => {
-    return (index < 3) && shouldHighlight;
-  };
-
   const determineHighlightedShops = () => {
     shops.map((item, index) => {
       if (index < 3 && shouldHighlight) {
