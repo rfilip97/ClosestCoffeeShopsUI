@@ -24,6 +24,7 @@ export default async function coffeeShops() {
         }
 
         sortedCoffeeShops.sort((cs1, cs2) => (cs1.delta - cs2.delta));
+
         return (n === RETRIEVE_ALL_TOKEN) ? sortedCoffeeShops : sortedCoffeeShops.slice(0, 3);
     };
 
