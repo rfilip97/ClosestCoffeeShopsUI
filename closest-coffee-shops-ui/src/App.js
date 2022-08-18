@@ -86,7 +86,7 @@ function App() {
         {shops.map((item) => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
         })}
-        <Pointer key={`pointer`} x={selectedPoint.x} y={selectedPoint.y} highlighted={shouldHighlight} />
+        <Pointer x={selectedPoint.x} y={selectedPoint.y} highlighted={shouldHighlight} />
         <Map invisible="true" />
       </div>
       <div className="CoordinatesContainer">
