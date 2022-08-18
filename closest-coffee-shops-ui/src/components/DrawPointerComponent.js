@@ -8,7 +8,7 @@ function Pointer(props) {
     const [newx, newy] = translateMapCoordinates(props.x, props.y);
     const initialStyle = { top: `${newy}px`, left: `${newx}px`, height: `${shopSizePx}px`, width: `${shopSizePx}px` };
 
-    if (props.highlighted === false) {
+    if (!props.highlighted) {
         return;
     }
     return (
