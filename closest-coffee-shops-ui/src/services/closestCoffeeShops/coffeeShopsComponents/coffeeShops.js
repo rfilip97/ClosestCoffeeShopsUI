@@ -38,8 +38,8 @@ export default async function coffeeShops() {
   function calculateDelta(coffeeShop, currentPosition) {
     const squareOfDifference = (a, b) => Math.pow(a - b, 2);
     const delta = Math.sqrt(
-      squareOfDifference(coffeeShop.x - currentPosition.x) +
-        squareOfDifference(coffeeShop.y - currentPosition.y)
+      squareOfDifference(coffeeShop.x, currentPosition.x) +
+        squareOfDifference(coffeeShop.y, currentPosition.y)
     );
 
     return Math.round(delta * 10000) / 10000;
