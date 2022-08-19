@@ -42,7 +42,13 @@ export default async function coffeeShops() {
         squareOfDifference(coffeeShop.y, currentPosition.y)
     );
 
-    return Math.round(delta * 10000) / 10000;
+    const roundToDecimals = (a) => {
+      const factor = Math.pow(10, a);
+      return (b) => Math.round(b * factor) / factor;
+    };
+
+    const roundToFourDecimals = roundToDecimals(4);
+    return roundToFourDecimals(delta);
   }
 
   return getNClosestCoffeShops;
