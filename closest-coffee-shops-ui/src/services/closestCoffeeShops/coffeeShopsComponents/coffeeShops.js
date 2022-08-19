@@ -13,7 +13,9 @@ export default async function coffeeShops() {
    * Get the first N coffee shops relative to our position
    *
    * @param {Number} n indicates the number of coffee shops, or return all if RETRIEVE_ALL_TOKEN is provided
-   * @param {point} currentPosition Current x and y coordinates
+   * @param {Object} currentPosition Current coordinates
+   * @param {String} currentPosition.x Current X coordinate
+   * @param {String} currentPosition.y Current Y coordinate
    * @returns array of the first N coffee shops
    */
   function getNClosestCoffeShops(n, currentPosition) {
@@ -32,7 +34,9 @@ export default async function coffeeShops() {
    * Determine the distance between our current position and the specified coffee shop
    *
    * @param {*} coffeeShop the coffee shop json object received from the API
-   * @param {point} currentPosition Current x and y coordinates
+   * @param {Object} currentPosition Current coordinates
+   * @param {String} currentPosition.x Current X coordinate
+   * @param {String} currentPosition.y Current Y coordinate
    * @returns delta value, rounded to four decimals
    */
   function calculateDelta(coffeeShop, currentPosition) {
