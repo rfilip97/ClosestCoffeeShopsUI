@@ -6,10 +6,10 @@ export const RETRIEVE_ALL_TOKEN = "RETRIEVE_ALL";
 
 /**
  * Creates the standard returned response in case of operation failure
- * 
+ *
  * @param {Number} errorCode The error code to be included in the response
  * @returns An array containing the ERROR_TOKEN and the error code
  */
 export function errorResponse(errorCode) {
-    return [ERROR_TOKEN, errorCode];
+  return [ERROR_TOKEN, errorCode];
 }

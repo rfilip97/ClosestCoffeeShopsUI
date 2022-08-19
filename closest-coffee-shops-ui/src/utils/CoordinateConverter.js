@@ -5,11 +5,11 @@
  * @returns the translated values
  */
 export function translateMapCoordinates(x, y) {
-    const translateCoord = (coord) => {
-        return (parseInt(coord) + 180) * 10;
-    };
+  const translateCoord = (coord) => {
+    return (parseInt(coord) + 180) * 10;
+  };
 
-    return [translateCoord(x), translateCoord(y)];
+  return [translateCoord(x), translateCoord(y)];
 }
 
 /**
@@ -19,13 +19,13 @@ export function translateMapCoordinates(x, y) {
  * @returns the translated values
  */
 export function reverseTranslateMapCoordinates(x, y) {
-    const revTranslateX = (coord) => {
-        return (parseInt(coord) / 10 - 180).toFixed(2);
-    };
+  const revTranslateX = (coord) => {
+    return (parseInt(coord) / 10 - 180).toFixed(2);
+  };
 
-    const revTranslateY = (coord) => {
-        return (parseInt(coord) / 10 - 180).toFixed(2);
-    };
+  const revTranslateY = (coord) => {
+    return (parseInt(coord) / 10 - 180).toFixed(2);
+  };
 
-    return [revTranslateX(x), revTranslateY(y)];
+  return [revTranslateX(x), revTranslateY(y)];
 }
