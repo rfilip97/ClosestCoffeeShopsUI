@@ -17,9 +17,9 @@ function App() {
   const getClosestCoffeShops = useRef(null);
 
   async function displayInitialCoffeeShops() {
-    getClosestCoffeShops.current = await coffeeShops();
-    const cshops = updateCoffeeShops();
-    setShops(cshops);
+    const coffeeshops = await coffeeShops();
+    getClosestCoffeShops.current = coffeeshops.getNClosestCoffeShops;
+    setShops(updateCoffeeShops());
   }
 
   function handleMouseEvents(coords) {

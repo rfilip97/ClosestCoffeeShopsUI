@@ -55,5 +55,12 @@ export default async function coffeeShops() {
     return roundToFourDecimals(delta);
   }
 
-  return getNClosestCoffeShops;
+  function isOk() {
+    return responseCode >= 200 && responseCode < 300;
+  }
+
+  return {
+    isOk,
+    getNClosestCoffeShops,
+  };
 }
