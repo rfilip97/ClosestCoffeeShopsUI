@@ -3,7 +3,7 @@ import "./App.css";
 import coffeeShops from "./services/closestCoffeeShops/coffeeShopsComponents/coffeeShops";
 import { RETRIEVE_ALL_TOKEN } from "./services/closestCoffeeShops/utils/utils";
 import { NUMBER_OF_SHOPS_TO_HIGHLIGHT } from "./services/closestCoffeeShops/utils/config";
-import CoffeeShop from "./components/DrawCoffeeShopcomponent";
+import { expandCoffeeShops } from "./components/DrawCoffeeShopcomponent";
 import Pointer from "./components/DrawPointerComponent";
 import Map from "./components/Map";
 import React, { useState, useEffect, useRef } from "react";
@@ -78,9 +78,7 @@ function App() {
   return (
     <div className="app">
       <Map onMouseMove={handleMouseMove} onClick={updateClickedPoint}>
-        {shops.map((item) => {
-          return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
-        })}
+        {expandCoffeeShops(shops)}
         {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
       </Map>
 

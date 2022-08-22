@@ -4,7 +4,13 @@ import { translateMapCoordinates } from "../utils/CoordinateConverter";
 
 import "./styles.css";
 
-function CoffeeShop(props) {
+export const expandCoffeeShops = (shops) => {
+  return shops.map((item) => {
+    return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
+  });
+};
+
+export function CoffeeShop(props) {
   const shopSizePx = 50;
   const [newx, newy] = translateMapCoordinates(props.shop.x, props.shop.y);
 
@@ -28,5 +34,3 @@ function CoffeeShop(props) {
     </div>
   );
 }
-
-export default CoffeeShop;
