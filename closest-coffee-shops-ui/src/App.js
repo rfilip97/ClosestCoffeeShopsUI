@@ -47,6 +47,7 @@ function App() {
         Number.MAX_SAFE_INTEGER,
         selectedPoint
       );
+
       return cshops;
     }
   };
