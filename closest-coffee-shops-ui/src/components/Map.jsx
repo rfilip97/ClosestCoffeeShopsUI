@@ -11,6 +11,7 @@ function Map(props) {
         src={map}
         alt="Map"
       />
+      {props.children}
     </div>
   );
 }
