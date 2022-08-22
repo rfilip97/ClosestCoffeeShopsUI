@@ -76,9 +76,7 @@ function App() {
     displayInitialCoffeeShops().catch(console.error);
   }, []);
 
-  useEffect(() => {
-    handleMouseEvents(coords);
-  }, [coords]);
+  useEffect(() => handleMouseEvents(coords), [coords]);
 
   useEffect(() => {
     const cshops = updateCoffeeShops();
