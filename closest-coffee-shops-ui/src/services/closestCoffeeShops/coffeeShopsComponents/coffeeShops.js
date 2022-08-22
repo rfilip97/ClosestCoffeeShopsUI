@@ -21,7 +21,7 @@ export default async function coffeeShops() {
   function getNClosestCoffeShops(n, currentPosition) {
     let sortedCoffeeShops = coffeeShops.map((cs) => ({
       ...cs,
-      delta: calculateDelta(cs, currentPosition),
+      delta: currentPosition && calculateDelta(cs, currentPosition),
     }));
     sortedCoffeeShops.sort((cs1, cs2) => cs1.delta - cs2.delta);
 

@@ -14,14 +14,12 @@ function Pointer(props) {
   };
 
   return (
-    props.highlighted && (
-      <img
-        src={pointerImg}
-        className="pointer"
-        alt="Pointer"
-        style={initialStyle}
-      ></img>
-    )
+    <img
+      src={pointerImg}
+      className="pointer"
+      alt="Pointer"
+      style={initialStyle}
+    ></img>
   );
 }
 

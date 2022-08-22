@@ -11,9 +11,8 @@ import { reverseTranslateMapCoordinates } from "./utils/CoordinateConverter";
 
 function App() {
   const [shops, setShops] = useState([]);
-  const [selectedPoint, setSelectedPoint] = useState({ x: 1, y: 1 });
+  const [selectedPoint, setSelectedPoint] = useState(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [shouldHighlight, setShouldHighlight] = useState(false);
   const getClosestCoffeShops = useRef(null);
 
   async function displayInitialCoffeeShops() {
@@ -25,7 +24,6 @@ function App() {
   const updateClickedPoint = (event) => {
     const newCoords = getMouseCoordinates(event);
     setSelectedPoint({ x: newCoords.x, y: newCoords.y });
-    setShouldHighlight(true);
   };
 
   const handleMouseMove = (event) => {
@@ -57,7 +55,7 @@ function App() {
   const determineHighlightedShops = (shops) => {
     if (shops) {
       const cshops = shops.map((item, index) => {
-        if (index < NUMBER_OF_SHOPS_TO_HIGHLIGHT && shouldHighlight) {
+        if (index < NUMBER_OF_SHOPS_TO_HIGHLIGHT && selectedPoint) {
           return { ...item, highlighted: true };
         }
 
@@ -83,11 +81,7 @@ function App() {
         {shops.map((item) => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
         })}
-        <Pointer
-          x={selectedPoint.x}
-          y={selectedPoint.y}
-          highlighted={shouldHighlight}
-        />
+        {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
       </Map>
 
       <div className="coordinatesContainer">
