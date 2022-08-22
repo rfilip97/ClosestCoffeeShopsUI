@@ -22,23 +22,26 @@ function App() {
     setShops(updateCoffeeShops());
   }
 
-  function updateClickedPoint() {
-    setSelectedPoint({ x: coords.x, y: coords.y });
+  function updateClickedPoint(event) {
+    const newCoords = getMouseCoordinates(event);
+    setSelectedPoint({ x: newCoords.x, y: newCoords.y });
     setShouldHighlight(true);
   }
+
+  const handleMouseMove = (event) => {
+    const newCoords = getMouseCoordinates(event);
+    setCoords({
+      x: newCoords.x,
+      y: newCoords.y,
+    });
+  };
 
   const getMouseCoordinates = (event) => {
     const absX = event.clientX - event.target.offsetLeft;
     const absY = event.clientY - event.target.offsetTop;
-    const [translatedX, translatedY] = reverseTranslateMapCoordinates(
-      absX,
-      absY
-    );
+    const [x, y] = reverseTranslateMapCoordinates(absX, absY);
 
-    setCoords({
-      x: translatedX,
-      y: translatedY,
-    });
+    return { x, y };
   };
 
   const updateCoffeeShops = () => {
@@ -76,7 +79,7 @@ function App() {
 
   return (
     <div className="app">
-      <Map onMouseMove={getMouseCoordinates} onClick={updateClickedPoint}>
+      <Map onMouseMove={handleMouseMove} onClick={updateClickedPoint}>
         {shops.map((item) => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
         })}
