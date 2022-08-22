@@ -7,12 +7,14 @@ import "./styles.css";
 function CoffeeShop(props) {
   const shopSizePx = 50;
   const [newx, newy] = translateMapCoordinates(props.shop.x, props.shop.y);
+
   const elementStyle = {
     top: `${newy}px`,
     left: `${newx}px`,
     height: `${shopSizePx}px`,
     width: `${shopSizePx}px`,
   };
+
   return (
     <div>
       <img
@@ -21,8 +23,8 @@ function CoffeeShop(props) {
         alt="Coffee shop"
         style={elementStyle}
         data-tip={props.shop.name}
-      ></img>
-      <ReactTooltipStyled className="tooltip" />
+      />
+      <ReactTooltipStyled className="shop-tooltip" />
     </div>
   );
 }

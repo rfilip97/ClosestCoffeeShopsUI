@@ -18,6 +18,14 @@
   position: absolute;
 }
 
+.shop + .shop-tooltip {
+  display: none;
+}
+
+.shop:hover + .shop-tooltip {
+  display: block;
+}
+
 .pointer {
   position: absolute;
   transform: scale(5);
