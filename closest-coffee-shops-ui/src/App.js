@@ -22,11 +22,11 @@ function App() {
     setShops(updateCoffeeShops());
   }
 
-  function updateClickedPoint(event) {
+  const updateClickedPoint = (event) => {
     const newCoords = getMouseCoordinates(event);
     setSelectedPoint({ x: newCoords.x, y: newCoords.y });
     setShouldHighlight(true);
-  }
+  };
 
   const handleMouseMove = (event) => {
     const newCoords = getMouseCoordinates(event);
