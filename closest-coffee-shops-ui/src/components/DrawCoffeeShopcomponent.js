@@ -1,4 +1,5 @@
 import coffeeShopImg from "../media/pictures/cshop.png";
+import { ReactTooltipStyled } from "./ReactTooltipStyled";
 import { translateMapCoordinates } from "../utils/CoordinateConverter";
 
 import "./styles.css";
@@ -13,12 +14,16 @@ function CoffeeShop(props) {
     width: `${shopSizePx}px`,
   };
   return (
-    <img
-      src={coffeeShopImg}
-      className={`shop ${props.shop.highlighted ? "-highlighted" : ""}`}
-      alt="Coffee shop"
-      style={elementStyle}
-    ></img>
+    <div>
+      <img
+        src={coffeeShopImg}
+        className={`shop ${props.shop.highlighted ? "-highlighted" : ""}`}
+        alt="Coffee shop"
+        style={elementStyle}
+        data-tip={props.shop.name}
+      ></img>
+      <ReactTooltipStyled className="tooltip" />
+    </div>
   );
 }
 

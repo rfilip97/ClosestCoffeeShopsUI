@@ -28,3 +28,7 @@
   border-radius: 50%;
   transform: scale(2.5);
 }
+
+.tooltip {
+  font-size: 50px;
+}
