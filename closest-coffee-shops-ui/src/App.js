@@ -5,7 +5,7 @@ import { RETRIEVE_ALL_TOKEN } from "./services/closestCoffeeShops/utils/utils";
 import { NUMBER_OF_SHOPS_TO_HIGHLIGHT } from "./services/closestCoffeeShops/utils/config";
 import CoffeeShop from "./components/DrawCoffeeShopcomponent";
 import Pointer from "./components/DrawPointerComponent";
-import Map from "./components/CanvasComponent";
+import Map from "./components/Map";
 import React, { useState, useEffect, useRef } from "react";
 import { reverseTranslateMapCoordinates } from "./utils/CoordinateConverter";
 
