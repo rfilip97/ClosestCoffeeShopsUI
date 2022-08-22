@@ -85,18 +85,15 @@ function App() {
 
   return (
     <div className="app">
-      <div onMouseMove={getMouseCoordinates}>
-        <Map />
-        {shops.map((item) => {
-          return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
-        })}
-        <Pointer
-          x={selectedPoint.x}
-          y={selectedPoint.y}
-          highlighted={shouldHighlight}
-        />
-        <Map invisible="true" />
-      </div>
+      <Map onMouseMove={getMouseCoordinates} />
+      {shops.map((item) => {
+        return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
+      })}
+      <Pointer
+        x={selectedPoint.x}
+        y={selectedPoint.y}
+        highlighted={shouldHighlight}
+      />
       <div className="coordinatesContainer">
         <h2>
           Coords: {coords.x} {coords.y}

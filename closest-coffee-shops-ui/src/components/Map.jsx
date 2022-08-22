@@ -3,14 +3,16 @@ import map from "../media/pictures/map.jpg";
 
 import "./styles.css";
 
-function Canvas(props) {
+function Map(props) {
   return (
-    <img
-      className={`map ${props.invisible ? "-invisible" : ""}`}
-      src={map}
-      alt="Map"
-    />
+    <div className="map-container" onMouseMove={props.onMouseMove}>
+      <img
+        className={`map ${props.invisible ? "-invisible" : ""}`}
+        src={map}
+        alt="Map"
+      />
+    </div>
   );
 }
 
-export default Canvas;
+export default Map;
