@@ -43,12 +43,10 @@ function App() {
 
   const updateCoffeeShops = () => {
     if (getClosestCoffeShops.current) {
-      const cshops = getClosestCoffeShops.current(
+      return getClosestCoffeShops.current(
         Number.MAX_SAFE_INTEGER,
         selectedPoint
       );
-
-      return cshops;
     }
   };
 
