@@ -1,7 +1,6 @@
 import "./App.css";
 
 import coffeeShops from "./services/closestCoffeeShops/coffeeShopsComponents/coffeeShops";
-import { RETRIEVE_ALL_TOKEN } from "./services/closestCoffeeShops/utils/utils";
 import { NUMBER_OF_SHOPS_TO_HIGHLIGHT } from "./services/closestCoffeeShops/utils/config";
 import { expandCoffeeShops } from "./components/DrawCoffeeShopcomponent";
 import Pointer from "./components/DrawPointerComponent";
@@ -45,7 +44,7 @@ function App() {
   const updateCoffeeShops = () => {
     if (getClosestCoffeShops.current) {
       const cshops = getClosestCoffeShops.current(
-        RETRIEVE_ALL_TOKEN,
+        Number.MAX_SAFE_INTEGER,
         selectedPoint
       );
       return cshops;

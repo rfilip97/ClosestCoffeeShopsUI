@@ -1,5 +1,4 @@
 import fetchCoffeeShops from "../dataFetcher/dataFetcher.js";
-import { RETRIEVE_ALL_TOKEN } from "../utils/utils";
 
 /**
  * Determine the closest coffee shops from our position
@@ -25,9 +24,7 @@ export default async function coffeeShops() {
     }));
     sortedCoffeeShops.sort((cs1, cs2) => cs1.delta - cs2.delta);
 
-    return n === RETRIEVE_ALL_TOKEN
-      ? sortedCoffeeShops
-      : sortedCoffeeShops.slice(0, 3);
+    return sortedCoffeeShops.slice(0, n);
   }
 
   /**
