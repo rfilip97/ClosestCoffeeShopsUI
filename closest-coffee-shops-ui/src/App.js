@@ -22,16 +22,9 @@ function App() {
     setShops(updateCoffeeShops());
   }
 
-  function handleMouseEvents(coords) {
-    const handleWindowMouseDown = () => {
-      setSelectedPoint({ x: coords.x, y: coords.y });
-      setShouldHighlight(true);
-    };
-    window.addEventListener("mousedown", handleWindowMouseDown);
-
-    return () => {
-      window.removeEventListener("mousedown", handleWindowMouseDown);
-    };
+  function updateClickedPoint() {
+    setSelectedPoint({ x: coords.x, y: coords.y });
+    setShouldHighlight(true);
   }
 
   const getMouseCoordinates = (event) => {
@@ -76,8 +69,6 @@ function App() {
     displayInitialCoffeeShops().catch(console.error);
   }, []);
 
-  useEffect(() => handleMouseEvents(coords), [coords]);
-
   useEffect(() => {
     const cshops = updateCoffeeShops();
     determineHighlightedShops(cshops);
@@ -85,7 +76,7 @@ function App() {
 
   return (
     <div className="app">
-      <Map onMouseMove={getMouseCoordinates}>
+      <Map onMouseMove={getMouseCoordinates} onClick={updateClickedPoint}>
         {shops.map((item) => {
           return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
         })}

@@ -10,6 +10,7 @@ function Map(props) {
         className={`map ${props.invisible ? "-invisible" : ""}`}
         src={map}
         alt="Map"
+        onClick={props.onClick}
       />
       {props.children}
     </div>
