@@ -26,12 +26,15 @@ function App() {
 
     const updateClickedPoint = (event) => {
       const newCoords = getMouseCoordinates(event);
-      setSelectedPoint(newCoords);
+      setSelectedPoint({ x: newCoords.x, y: newCoords.y });
     };
 
     const handleMouseMove = (event) => {
       const newCoords = getMouseCoordinates(event);
-      setCoords({ newCoords });
+      setCoords({
+        x: newCoords.x,
+        y: newCoords.y,
+      });
     };
 
     return { updateClickedPoint, handleMouseMove };
@@ -82,6 +85,7 @@ function App() {
         {useCoffeeShops()}
         {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
       </Map>
+
       <div className="coordinatesContainer">
         <h2>
           Coords: {coords.x} {coords.y}
