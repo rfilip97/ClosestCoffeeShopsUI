@@ -1,3 +1,4 @@
+import { roundToDecimals, squareOfDifference } from "../../../utils/math.js";
 import fetchCoffeeShops from "../dataFetcher/dataFetcher.js";
 
 /**
@@ -9,25 +10,6 @@ export default async function coffeeShops() {
   const [coffeeShops, responseCode] = await fetchCoffeeShops();
 
   /**
-   * Get the first N coffee shops relative to our position
-   *
-   * @param {Number} n indicates the number of coffee shops, or return all if RETRIEVE_ALL_TOKEN is provided
-   * @param {Object} currentPosition Current coordinates
-   * @param {String} currentPosition.x Current X coordinate
-   * @param {String} currentPosition.y Current Y coordinate
-   * @returns array of the first N coffee shops
-   */
-  function getNClosestCoffeShops(n, currentPosition) {
-    let sortedCoffeeShops = coffeeShops.map((cs) => ({
-      ...cs,
-      delta: currentPosition && calculateDelta(cs, currentPosition),
-    }));
-    sortedCoffeeShops.sort((cs1, cs2) => cs1.delta - cs2.delta);
-
-    return sortedCoffeeShops.slice(0, n);
-  }
-
-  /**
    * Determine the distance between our current position and the specified coffee shop
    *
    * @param {*} coffeeShop the coffee shop json object received from the API
@@ -37,23 +19,34 @@ export default async function coffeeShops() {
    * @returns delta value, rounded to four decimals
    */
   function calculateDelta(coffeeShop, currentPosition) {
-    const squareOfDifference = (a, b) => Math.pow(a - b, 2);
     const delta = Math.sqrt(
       squareOfDifference(coffeeShop.x, currentPosition.x) +
         squareOfDifference(coffeeShop.y, currentPosition.y)
     );
 
-    const roundToDecimals = (a) => {
-      const factor = Math.pow(10, a);
-      return (b) => Math.round(b * factor) / factor;
-    };
-
-    const roundToFourDecimals = roundToDecimals(4);
-    return roundToFourDecimals(delta);
+    return roundToDecimals(delta, 4);
   }
 
-  function getCoffeeShops(currentPosition) {
-    return getNClosestCoffeShops(Number.MAX_SAFE_INTEGER, currentPosition);
+  /**
+   * Get the first N coffee shops relative to our position
+   *
+   * @param {Number} limit indicates the number of coffee shops, or return all if RETRIEVE_ALL_TOKEN is provided
+   * @param {Object} position Current coordinates
+   * @param {String} position.x Current X coordinate
+   * @param {String} position.y Current Y coordinate
+   * @returns array of the first N coffee shops
+   */
+  function getClosestCoffeShops(position, limit) {
+    const sortedShops = coffeeShops
+      .map((cs) => ({
+        ...cs,
+        delta: calculateDelta(cs, position),
+      }))
+      .sort((cs1, cs2) => cs1.delta - cs2.delta);
+
+    return typeof limit === "number"
+      ? sortedShops.slice(0, limit)
+      : sortedShops;
   }
 
   function isOk() {
@@ -62,7 +55,6 @@ export default async function coffeeShops() {
 
   return {
     isOk,
-    getCoffeeShops,
-    getNClosestCoffeShops,
+    getCoffeeShops: getClosestCoffeShops,
   };
 }

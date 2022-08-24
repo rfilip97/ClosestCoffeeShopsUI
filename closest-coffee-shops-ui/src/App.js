@@ -8,42 +8,33 @@ import Map from "./components/Map";
 import React, { useState, useEffect, useRef } from "react";
 import { reverseTranslateMapCoordinates } from "./utils/CoordinateConverter";
 
+const translateMouseCoordsToMapCoords = (event) => {
+  const absX = event.clientX - event.target.offsetLeft;
+  const absY = event.clientY - event.target.offsetTop;
+
+  const [x, y] = reverseTranslateMapCoordinates(absX, absY);
+
+  return { x, y };
+};
+
+const translateMouseCoordsAndCall = (cb) => (event) => {
+  const { x, y } = translateMouseCoordsToMapCoords(event);
+
+  cb({ x, y });
+};
+
 function App() {
   const [shops, setShops] = useState([]);
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const getClosestCoffeShops = useRef(null);
-  const mouseEventHandlers = getMouseEventHandlers();
-
-  function getMouseEventHandlers() {
-    const getMouseCoordinates = (event) => {
-      const absX = event.clientX - event.target.offsetLeft;
-      const absY = event.clientY - event.target.offsetTop;
-      const [x, y] = reverseTranslateMapCoordinates(absX, absY);
-
-      return { x, y };
-    };
-
-    const updateClickedPoint = (event) => {
-      const newCoords = getMouseCoordinates(event);
-      setSelectedPoint({ x: newCoords.x, y: newCoords.y });
-    };
-
-    const handleMouseMove = (event) => {
-      const newCoords = getMouseCoordinates(event);
-      setCoords({
-        x: newCoords.x,
-        y: newCoords.y,
-      });
-    };
-
-    return { updateClickedPoint, handleMouseMove };
-  }
 
   useEffect(() => {
     const displayInitialCoffeeShops = async () => {
       const coffeeshops = await coffeeShops();
+
       getClosestCoffeShops.current = coffeeshops.getCoffeeShops;
+
       setShops(getClosestCoffeShops.current({ x: 0, y: 0 }));
     };
 
@@ -52,13 +43,15 @@ function App() {
 
   const useCoffeeShops = () => {
     const determineHighlightedShops = (shops) => {
-      if (shops) {
+      if (Array.isArray(shops)) {
         const cshops = shops.map((item, index) => {
-          if (selectedPoint && index < NUMBER_OF_SHOPS_TO_HIGHLIGHT) {
-            return { ...item, highlighted: true };
-          }
+          const highlighted =
+            selectedPoint && index < NUMBER_OF_SHOPS_TO_HIGHLIGHT;
 
-          return { ...item, highlighted: false };
+          return {
+            ...item,
+            highlighted,
+          };
         });
 
         setShops(cshops);
@@ -66,23 +59,25 @@ function App() {
     };
 
     useEffect(() => {
-      if (getClosestCoffeShops.current) {
-        determineHighlightedShops(getClosestCoffeShops.current(selectedPoint));
+      if (typeof getClosestCoffeShops.current === "function" && selectedPoint) {
+        const orderedCoffeShops = getClosestCoffeShops.current(selectedPoint);
+
+        determineHighlightedShops(orderedCoffeShops);
       }
     }, [selectedPoint]);
-
-    return shops.map((item) => {
-      return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
-    });
   };
+
+  useCoffeeShops();
 
   return (
     <div className="app">
       <Map
-        onMouseMove={mouseEventHandlers.handleMouseMove}
-        onClick={mouseEventHandlers.updateClickedPoint}
+        onMouseMove={translateMouseCoordsAndCall(setCoords)}
+        onClick={translateMouseCoordsAndCall(setSelectedPoint)}
       >
-        {useCoffeeShops()}
+        {shops.map((item) => (
+          <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
+        ))}
         {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
       </Map>
 
