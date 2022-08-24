@@ -2,7 +2,7 @@ import "./App.css";
 
 import coffeeShops from "./services/closestCoffeeShops/coffeeShopsComponents/coffeeShops";
 import { NUMBER_OF_SHOPS_TO_HIGHLIGHT } from "./services/closestCoffeeShops/utils/config";
-import { expandCoffeeShops } from "./components/DrawCoffeeShopcomponent";
+import { CoffeeShop } from "./components/DrawCoffeeShopcomponent";
 import Pointer from "./components/DrawPointerComponent";
 import Map from "./components/Map";
 import React, { useState, useEffect, useRef } from "react";
@@ -13,70 +13,76 @@ function App() {
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const getClosestCoffeShops = useRef(null);
+  const mouseEventHandlers = getMouseEventHandlers();
 
-  async function displayInitialCoffeeShops() {
-    const coffeeshops = await coffeeShops();
-    getClosestCoffeShops.current = coffeeshops.getNClosestCoffeShops;
-    setShops(updateCoffeeShops());
+  function getMouseEventHandlers() {
+    const getMouseCoordinates = (event) => {
+      const absX = event.clientX - event.target.offsetLeft;
+      const absY = event.clientY - event.target.offsetTop;
+      const [x, y] = reverseTranslateMapCoordinates(absX, absY);
+
+      return { x, y };
+    };
+
+    const updateClickedPoint = (event) => {
+      const newCoords = getMouseCoordinates(event);
+      setSelectedPoint({ x: newCoords.x, y: newCoords.y });
+    };
+
+    const handleMouseMove = (event) => {
+      const newCoords = getMouseCoordinates(event);
+      setCoords({
+        x: newCoords.x,
+        y: newCoords.y,
+      });
+    };
+
+    return { updateClickedPoint, handleMouseMove };
   }
 
-  const updateClickedPoint = (event) => {
-    const newCoords = getMouseCoordinates(event);
-    setSelectedPoint({ x: newCoords.x, y: newCoords.y });
-  };
-
-  const handleMouseMove = (event) => {
-    const newCoords = getMouseCoordinates(event);
-    setCoords({
-      x: newCoords.x,
-      y: newCoords.y,
-    });
-  };
-
-  const getMouseCoordinates = (event) => {
-    const absX = event.clientX - event.target.offsetLeft;
-    const absY = event.clientY - event.target.offsetTop;
-    const [x, y] = reverseTranslateMapCoordinates(absX, absY);
-
-    return { x, y };
-  };
-
-  const updateCoffeeShops = () => {
-    if (getClosestCoffeShops.current) {
-      return getClosestCoffeShops.current(
-        Number.MAX_SAFE_INTEGER,
-        selectedPoint
-      );
-    }
-  };
-
-  const determineHighlightedShops = (shops) => {
-    if (shops) {
-      const cshops = shops.map((item, index) => {
-        if (index < NUMBER_OF_SHOPS_TO_HIGHLIGHT && selectedPoint) {
-          return { ...item, highlighted: true };
-        }
-
-        return { ...item, highlighted: false };
-      });
-
-      setShops(cshops);
-    }
-  };
-
   useEffect(() => {
+    const displayInitialCoffeeShops = async () => {
+      const coffeeshops = await coffeeShops();
+      getClosestCoffeShops.current = coffeeshops.getCoffeeShops;
+      setShops(getClosestCoffeShops.current({ x: 0, y: 0 }));
+    };
+
     displayInitialCoffeeShops().catch(console.error);
   }, []);
 
-  useEffect(() => {
-    const cshops = updateCoffeeShops();
-    determineHighlightedShops(cshops);
-  }, [selectedPoint]);
+  const useCoffeeShops = () => {
+    const determineHighlightedShops = (shops) => {
+      if (shops) {
+        const cshops = shops.map((item, index) => {
+          if (index < NUMBER_OF_SHOPS_TO_HIGHLIGHT && selectedPoint) {
+            return { ...item, highlighted: true };
+          }
+
+          return { ...item, highlighted: false };
+        });
+
+        setShops(cshops);
+      }
+    };
+
+    useEffect(() => {
+      if (getClosestCoffeShops.current) {
+        determineHighlightedShops(getClosestCoffeShops.current(selectedPoint));
+      }
+    }, [selectedPoint]);
+
+    return shops.map((item) => {
+      return <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />;
+    });
+  };
 
   return (
     <div className="app">
-      <Map onMouseMove={handleMouseMove} onClick={updateClickedPoint}>
-        {expandCoffeeShops(shops)}
+      <Map
+        onMouseMove={mouseEventHandlers.handleMouseMove}
+        onClick={mouseEventHandlers.updateClickedPoint}
+      >
+        {useCoffeeShops()}
         {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
       </Map>
 

@@ -52,12 +52,17 @@ export default async function coffeeShops() {
     return roundToFourDecimals(delta);
   }
 
+  function getCoffeeShops(currentPosition) {
+    return getNClosestCoffeShops(Number.MAX_SAFE_INTEGER, currentPosition);
+  }
+
   function isOk() {
     return responseCode >= 200 && responseCode < 300;
   }
 
   return {
     isOk,
+    getCoffeeShops,
     getNClosestCoffeShops,
   };
 }
