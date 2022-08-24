@@ -51,7 +51,7 @@ function App() {
     const determineHighlightedShops = (shops) => {
       if (shops) {
         const cshops = shops.map((item, index) => {
-          if (index < NUMBER_OF_SHOPS_TO_HIGHLIGHT && selectedPoint) {
+          if (selectedPoint && index < NUMBER_OF_SHOPS_TO_HIGHLIGHT) {
             return { ...item, highlighted: true };
           }
 
