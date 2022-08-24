@@ -29,3 +29,18 @@ export function reverseTranslateMapCoordinates(x, y) {
 
   return [revTranslateX(x), revTranslateY(y)];
 }
+
+export const translateMouseCoordsToMapCoords = (event) => {
+  const absX = event.clientX - event.target.offsetLeft;
+  const absY = event.clientY - event.target.offsetTop;
+
+  const [x, y] = reverseTranslateMapCoordinates(absX, absY);
+
+  return { x, y };
+};
+
+export const translateMouseCoordsAndCall = (cb) => (event) => {
+  const { x, y } = translateMouseCoordsToMapCoords(event);
+
+  cb({ x, y });
+};

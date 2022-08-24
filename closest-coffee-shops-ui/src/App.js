@@ -6,22 +6,7 @@ import { CoffeeShop } from "./components/DrawCoffeeShopcomponent";
 import Pointer from "./components/DrawPointerComponent";
 import Map from "./components/Map";
 import React, { useState, useEffect, useRef } from "react";
-import { reverseTranslateMapCoordinates } from "./utils/CoordinateConverter";
-
-const translateMouseCoordsToMapCoords = (event) => {
-  const absX = event.clientX - event.target.offsetLeft;
-  const absY = event.clientY - event.target.offsetTop;
-
-  const [x, y] = reverseTranslateMapCoordinates(absX, absY);
-
-  return { x, y };
-};
-
-const translateMouseCoordsAndCall = (cb) => (event) => {
-  const { x, y } = translateMouseCoordsToMapCoords(event);
-
-  cb({ x, y });
-};
+import { translateMouseCoordsAndCall } from "./utils/CoordinateConverter";
 
 function App() {
   const [shops, setShops] = useState([]);
