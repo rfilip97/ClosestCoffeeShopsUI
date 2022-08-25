@@ -5,13 +5,13 @@ import Pointer from "./components/DrawPointerComponent";
 import Map from "./components/Map";
 import React, { useState } from "react";
 import { translateMouseCoordsAndCall } from "./utils/CoordinateConverter";
-import { useCoffeeShops } from "./components/useCoffeeShops";
+import { useClosestCoffeeShops } from "./components/useCoffeeShops";
 
 function App() {
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-  const shops = useCoffeeShops(selectedPoint);
+  const shops = useClosestCoffeeShops(selectedPoint);
 
   return (
     <div className="app">

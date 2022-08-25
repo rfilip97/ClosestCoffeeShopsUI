@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import coffeeShops from "../services/closestCoffeeShops/coffeeShopsComponents/coffeeShops";
 import { getHighlightedShops } from "../utils/shops";
 
-export function useCoffeeShops(point) {
+export function useClosestCoffeeShops(point) {
   const [shops, setShops] = useState([]);
   const getClosestCoffeShops = useRef(null);
 
