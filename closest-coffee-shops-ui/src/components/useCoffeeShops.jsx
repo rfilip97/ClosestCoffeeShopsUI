@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import coffeeShops from "../services/closestCoffeeShops/coffeeShopsComponents/coffeeShops";
-import { NUMBER_OF_SHOPS_TO_HIGHLIGHT } from "../services/closestCoffeeShops/utils/config";
+import { getHighlightedShops } from "../utils/shops";
 
 export function useCoffeeShops(point) {
   const [shops, setShops] = useState([]);
@@ -12,32 +12,14 @@ export function useCoffeeShops(point) {
 
       getClosestCoffeShops.current = coffeeshops.getCoffeeShops;
 
-      setShops(getSortedShopsRelativeTo({ x: 0, y: 0 }));
+      setShops(getClosestCoffeShops.current({ x: 0, y: 0 }));
     };
 
     getInitialCoffeeShops().catch(console.error);
   }, []);
 
-  const getSortedShopsRelativeTo = (point) =>
-    getClosestCoffeShops.current(point);
-
-  const getHighlightedShops = (shops) => {
-    if (Array.isArray(shops)) {
-      const cshops = shops.map((item, index) => {
-        const highlighted = point && index < NUMBER_OF_SHOPS_TO_HIGHLIGHT;
-
-        return {
-          ...item,
-          highlighted,
-        };
-      });
-
-      return cshops;
-    }
-  };
-
   const getHighlightedSortedShopsRelativeTo = (point) =>
-    getHighlightedShops(getSortedShopsRelativeTo(point));
+    getHighlightedShops(getClosestCoffeShops.current(point), point);
 
   useEffect(() => {
     if (typeof getClosestCoffeShops.current === "function" && point) {
