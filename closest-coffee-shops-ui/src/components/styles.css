@@ -24,6 +24,7 @@
 
 .shop:hover + .shop-tooltip {
   display: block;
+  border: none;
 }
 
 .pointer {
