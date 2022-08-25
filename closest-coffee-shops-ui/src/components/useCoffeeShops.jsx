@@ -7,7 +7,7 @@ export function useCoffeeShops(point) {
   const getClosestCoffeShops = useRef(null);
 
   useEffect(() => {
-    const displayInitialCoffeeShops = async () => {
+    const getInitialCoffeeShops = async () => {
       const coffeeshops = await coffeeShops();
 
       getClosestCoffeShops.current = coffeeshops.getCoffeeShops;
@@ -15,7 +15,7 @@ export function useCoffeeShops(point) {
       setShops(getSortedShopsRelativeTo({ x: 0, y: 0 }));
     };
 
-    displayInitialCoffeeShops().catch(console.error);
+    getInitialCoffeeShops().catch(console.error);
   }, []);
 
   const getSortedShopsRelativeTo = (point) =>
