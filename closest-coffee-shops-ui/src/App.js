@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { translateMouseCoordsAndCall } from "./utils/CoordinateConverter";
 import { useClosestCoffeeShops } from "./components/useCoffeeShops";
 import { useSelector } from "react-redux";
+import ShopsLoader from "./containers/shops-loader";
 
 function App() {
   const [selectedPoint, setSelectedPoint] = useState(null);
@@ -17,23 +18,26 @@ function App() {
   const shops = useSelector((state) => state.shops.shops);
 
   return (
-    <div className="app">
-      <Map
-        onMouseMove={translateMouseCoordsAndCall(setCoords)}
-        onClick={translateMouseCoordsAndCall(setSelectedPoint)}
-      >
-        {shops.map((item) => (
-          <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
-        ))}
-        {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
-      </Map>
+    <>
+      <ShopsLoader />
+      <div className="app">
+        <Map
+          onMouseMove={translateMouseCoordsAndCall(setCoords)}
+          onClick={translateMouseCoordsAndCall(setSelectedPoint)}
+        >
+          {shops.map((item) => (
+            <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
+          ))}
+          {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
+        </Map>
 
-      <div className="coordinatesContainer">
-        <h2>
-          Coords: {coords.x} {coords.y}
-        </h2>
+        <div className="coordinatesContainer">
+          <h2>
+            Coords: {coords.x} {coords.y}
+          </h2>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
