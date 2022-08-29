@@ -1,12 +1,11 @@
 import { useEffect, useRef } from "react";
 import coffeeShops from "../services/closestCoffeeShops/coffeeShopsComponents/coffeeShops";
 import { getHighlightedShops } from "../utils/shops";
-import { useDispatch } from "react-redux";
-import allActions from "../actions/allActions";
+import { store } from "../store";
+import { setShops } from "../slices/shopSlice";
 
 export function useClosestCoffeeShops(point) {
   const getClosestCoffeShops = useRef(null);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     const getInitialCoffeeShops = async () => {
@@ -24,7 +23,7 @@ export function useClosestCoffeeShops(point) {
     getHighlightedShops(getClosestCoffeShops.current(point), point);
 
   const dispatchShops = (shops) => {
-    dispatch(allActions.shopActions.setShops(shops));
+    store.dispatch(setShops(shops)); //
   };
 
   useEffect(() => {

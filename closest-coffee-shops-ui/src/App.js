@@ -14,7 +14,7 @@ function App() {
 
   useClosestCoffeeShops(selectedPoint);
 
-  const shops = useSelector((state) => state.shopReducer.shops);
+  const shops = useSelector((state) => state.shops.shops);
 
   return (
     <div className="app">
