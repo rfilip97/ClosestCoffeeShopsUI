@@ -6,12 +6,15 @@ import Map from "./components/Map";
 import React, { useState } from "react";
 import { translateMouseCoordsAndCall } from "./utils/CoordinateConverter";
 import { useClosestCoffeeShops } from "./components/useCoffeeShops";
+import { useSelector } from "react-redux";
 
 function App() {
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-  const shops = useClosestCoffeeShops(selectedPoint);
+  useClosestCoffeeShops(selectedPoint);
+
+  const shops = useSelector((state) => state.shopReducer.shops);
 
   return (
     <div className="app">

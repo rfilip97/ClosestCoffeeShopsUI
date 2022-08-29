@@ -1,10 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import coffeeShops from "../services/closestCoffeeShops/coffeeShopsComponents/coffeeShops";
 import { getHighlightedShops } from "../utils/shops";
+import { useDispatch } from "react-redux";
+import allActions from "../actions/allActions";
 
 export function useClosestCoffeeShops(point) {
-  const [shops, setShops] = useState([]);
   const getClosestCoffeShops = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getInitialCoffeeShops = async () => {
@@ -12,7 +14,7 @@ export function useClosestCoffeeShops(point) {
 
       getClosestCoffeShops.current = coffeeshops.getCoffeeShops;
 
-      setShops(getClosestCoffeShops.current({ x: 0, y: 0 }));
+      dispatchShops(getClosestCoffeShops.current({ x: 0, y: 0 }));
     };
 
     getInitialCoffeeShops().catch(console.error);
@@ -21,11 +23,13 @@ export function useClosestCoffeeShops(point) {
   const getHighlightedSortedShopsRelativeTo = (point) =>
     getHighlightedShops(getClosestCoffeShops.current(point), point);
 
+  const dispatchShops = (shops) => {
+    dispatch(allActions.shopActions.setShops(shops));
+  };
+
   useEffect(() => {
     if (typeof getClosestCoffeShops.current === "function" && point) {
-      setShops(getHighlightedSortedShopsRelativeTo(point));
+      dispatchShops(getHighlightedSortedShopsRelativeTo(point));
     }
   }, [point]);
-
-  return shops;
 }
