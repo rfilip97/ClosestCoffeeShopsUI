@@ -1,5 +1,5 @@
 import pointerImg from "../media/pictures/x.png";
-import { translateMapCoordinates } from "../utils/coordinateConverter";
+import { translateMapCoordinates } from "../utils/coordinates";
 
 import "./styles.css";
 

@@ -1,6 +1,6 @@
 import coffeeShopImg from "../media/pictures/cshop.png";
 import { ReactTooltipStyled } from "./ReactTooltipStyled";
-import { translateMapCoordinates } from "../utils/coordinateConverter";
+import { translateMapCoordinates } from "../utils/coordinates";
 
 import "./styles.css";
 

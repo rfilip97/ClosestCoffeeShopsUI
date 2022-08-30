@@ -4,7 +4,7 @@ import { CoffeeShop } from "../components/DrawCoffeeShopcomponent";
 import Pointer from "../components/DrawPointerComponent";
 import Map from "../components/Map";
 import React, { useState } from "react";
-import { translateMouseCoordsAndCall } from "../utils/coordinateConverter";
+import { translateMouseCoordsAndCall } from "../utils/coordinates";
 import { useClosestCoffeeShops } from "../hooks/useCoffeeShops";
 import { useSelector } from "react-redux";
 import { setCoords } from "../slices/coordsSlice";
