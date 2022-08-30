@@ -1,6 +1,7 @@
 import './App.css';
 
 import { getNearestShops } from "./services/closestCoffeeShops/app/app.js";
+import { RETRIEVE_ALL_TOKEN } from './services/closestCoffeeShops/utils/utils'
 import CoffeeShop from './components/DrawCoffeeShopcomponent';
 import Map from "./components/CanvasComponent"
 import React, { useState, useEffect } from 'react'
@@ -10,19 +11,17 @@ function App() {
 
   useEffect(() => {
     const loadPost = () => {
-      getNearestShops({ x: 1, y: 1 }).then(setShops);
+      getNearestShops({ x: 1, y: 1 }, RETRIEVE_ALL_TOKEN).then(setShops);
     }
     loadPost();
   }, []);
 
   return (
     <div className="App">
-      <div>
-        <Map/>
-          {shops.map(item => {
-            return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y}/>
-          })}
-      </div>
+        <Map />
+        {shops.map(item => {
+          return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} />
+        })}
     </div>
   );
 }

@@ -12,7 +12,7 @@ import SortedDeltaCoffeeShopList from "../coffeeShopsComponents/sortedDeltaCoffe
  *
  * @returns {Array<position>}
  */
-export async function getNearestShops(position) {
+export async function getNearestShops(position, nbOfShops = 3) {
   // Check if we received numbers as arguments
   if (isNaN(position.x) || isNaN(position.y)) {
     console.log("Invalid input: numbers expected");
@@ -70,5 +70,5 @@ export async function getNearestShops(position) {
   );
 
   // Get the closest 3 coffee shops
-  return sortedDeltaCoffeShopList.getNClosestCoffeShops(3);
+  return sortedDeltaCoffeShopList.getNClosestCoffeShops(nbOfShops);
 }
