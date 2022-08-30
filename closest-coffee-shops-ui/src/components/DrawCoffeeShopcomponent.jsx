@@ -2,7 +2,7 @@ import coffeeShopImg from "../media/pictures/cshop.png";
 import { translateMapCoordinates } from "../utils/coordinates";
 import { ReactTooltipStyled } from "./ReactTooltipStyled";
 
-import "./styles.css";
+import "../scss/shop/_shop.scss";
 
 export function CoffeeShop(props) {
   const shopSizePx = 50;

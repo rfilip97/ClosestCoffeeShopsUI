@@ -1,7 +1,7 @@
 import React from "react";
 import map from "../media/pictures/map.jpg";
 
-import "./styles.css";
+import "../scss/map/_map.scss";
 
 function Map(props) {
   return (

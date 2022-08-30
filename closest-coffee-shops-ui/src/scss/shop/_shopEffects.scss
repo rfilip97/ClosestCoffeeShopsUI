@@ -1,0 +1,15 @@
+@use "./shopConstants";
+
+$borderRadiusFactor: 50%;
+
+$upscaleFactor: 2.5;
+
+@mixin upscaledShop {
+  border-radius: $borderRadiusFactor;
+  transform: scale($upscaleFactor);
+}
+
+@mixin markedShop {
+  border-radius: $borderRadiusFactor;
+  border: shopConstants.$redBorder;
+}

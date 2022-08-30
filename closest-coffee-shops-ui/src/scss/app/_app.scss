@@ -1,0 +1,6 @@
+@use "./appConstants";
+
+.app {
+  padding: appConstants.$padding;
+  display: flex;
+}

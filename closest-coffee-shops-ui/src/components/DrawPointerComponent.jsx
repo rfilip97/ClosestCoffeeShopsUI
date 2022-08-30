@@ -1,7 +1,7 @@
 import pointerImg from "../media/pictures/x.png";
 import { translateMapCoordinates } from "../utils/coordinates";
 
-import "./styles.css";
+import "../scss/pointer/_pointer.scss";
 
 function Pointer(props) {
   const shopSizePx = 50;

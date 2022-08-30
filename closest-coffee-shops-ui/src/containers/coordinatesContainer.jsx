@@ -1,3 +1,5 @@
+import "../scss/coordinates/_coordsContainer.scss";
+
 function CoordinatesContainer(props) {
   return (
     <div className="coordinatesContainer">

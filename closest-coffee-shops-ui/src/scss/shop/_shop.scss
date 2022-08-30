@@ -1,0 +1,19 @@
+@use "./shopEffects";
+
+.shop {
+  position: absolute;
+
+  + .shop-tooltip {
+    display: none;
+  }
+
+  &:hover + .shop-tooltip {
+    display: block;
+    border: none;
+  }
+
+  &.-highlighted {
+    @include shopEffects.upscaledShop();
+    @include shopEffects.markedShop();
+  }
+}

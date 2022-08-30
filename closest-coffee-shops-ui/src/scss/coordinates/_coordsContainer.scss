@@ -1,0 +1,6 @@
+@use "./coordsConstants";
+
+.coordinatesContainer {
+  padding: coordsConstants.$containerPadding;
+  font-size: coordsConstants.$containerFontSize;
+}

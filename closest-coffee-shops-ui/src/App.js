@@ -1,4 +1,4 @@
-import "./App.css";
+import "./scss//app/_app.scss";
 
 import { useState } from "react";
 import CoordinatesContainer from "./containers/coordinatesContainer";

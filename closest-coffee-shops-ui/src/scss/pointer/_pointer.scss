@@ -1,0 +1,6 @@
+@use "./pointerConstants";
+
+.pointer {
+  position: absolute;
+  transform: scale(pointerConstants.$scaleFactor);
+}
