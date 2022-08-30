@@ -1,16 +1,14 @@
 import "./App.css";
 
-import { useSelector } from "react-redux";
-import ShopsLoader from "./containers/shops-loader";
 import MapContainer from "./containers/map-container";
 import CoordinatesContainer from "./containers/coordinatesContainer";
+import { useShopsLoading } from "./hooks/useShopsLoading";
 
 function App() {
-  const coords = useSelector((state) => state.coords);
+  useShopsLoading();
 
   return (
     <>
-      <ShopsLoader />
       <div className="app">
         <MapContainer />
         <CoordinatesContainer />

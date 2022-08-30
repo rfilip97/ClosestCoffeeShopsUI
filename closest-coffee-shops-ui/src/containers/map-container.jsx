@@ -7,8 +7,8 @@ import React, { useState } from "react";
 import { translateMouseCoordsAndCall } from "../utils/CoordinateConverter";
 import { useClosestCoffeeShops } from "../components/useCoffeeShops";
 import { useSelector } from "react-redux";
-import { store } from "../store";
 import { setCoords } from "../slices/coordsSlice";
+import { useDispatch } from "react-redux";
 
 function MapContainer() {
   const [selectedPoint, setSelectedPoint] = useState(null);
@@ -16,9 +16,10 @@ function MapContainer() {
   useClosestCoffeeShops(selectedPoint);
 
   const shops = useSelector((state) => state.shops.shops);
+  const dispatch = useDispatch();
 
   const dispatchCoords = (point) => {
-    store.dispatch(setCoords(point));
+    dispatch(setCoords(point));
   };
 
   return (

@@ -1,15 +1,16 @@
-import { useEffect, useRef } from "react";
-import { store } from "../store";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getHighlightedSortedShopsRelativeTo } from "../utils/shops";
+import { useDispatch } from "react-redux";
 
 import { setShops } from "../slices/shopSlice";
 
 export function useClosestCoffeeShops(point) {
   const shops = useSelector((state) => state.shops.shops);
+  const dispatch = useDispatch();
 
   const dispatchShops = (shops) => {
-    store.dispatch(setShops(shops));
+    dispatch(setShops(shops));
   };
 
   useEffect(() => {
