@@ -3,9 +3,7 @@ import fetchCoffeeShops from "../services/closestCoffeeShops/dataFetcher/dataFet
 import { store } from "../store";
 import { setShops } from "../slices/shopSlice";
 
-import { useSelector } from "react-redux";
-
-function ShopsLoader(params) {
+function ShopsLoader() {
   useEffect(() => {
     fetchCoffeeShops().then(([coffeeShops, responseCode]) => {
       if (responseCode >= 200 && responseCode < 300) {
