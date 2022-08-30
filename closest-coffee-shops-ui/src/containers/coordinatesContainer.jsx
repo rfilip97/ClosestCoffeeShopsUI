@@ -1,12 +1,8 @@
-import { useSelector } from "react-redux";
-
-function CoordinatesContainer() {
-  const coords = useSelector((state) => state.coords);
-
+function CoordinatesContainer(props) {
   return (
     <div className="coordinatesContainer">
       <h2>
-        Coords: {coords.x} {coords.y}
+        Coords: {props.coords.x} {props.coords.y}
       </h2>
     </div>
   );
