@@ -23,17 +23,15 @@ function MapContainer() {
   };
 
   return (
-    <>
-      <Map
-        onMouseMove={translateMouseCoordsAndCall(dispatchCoords)}
-        onClick={translateMouseCoordsAndCall(setSelectedPoint)}
-      >
-        {shops.map((item) => (
-          <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
-        ))}
-        {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
-      </Map>
-    </>
+    <Map
+      onMouseMove={translateMouseCoordsAndCall(dispatchCoords)}
+      onClick={translateMouseCoordsAndCall(setSelectedPoint)}
+    >
+      {shops.map((item) => (
+        <CoffeeShop key={`coffeshopitem-${item.name}`} shop={item} />
+      ))}
+      {selectedPoint && <Pointer x={selectedPoint.x} y={selectedPoint.y} />}
+    </Map>
   );
 }
 
