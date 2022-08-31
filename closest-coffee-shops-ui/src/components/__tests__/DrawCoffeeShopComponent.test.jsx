@@ -3,7 +3,7 @@ import { unmountComponentAtNode } from "react-dom";
 import { MOCKED_SHOPS_DATA } from "../../mocks/mockedData";
 import { shopsFetcherMock } from "../../mocks/shopsFetcherMock";
 import { translateMapCoordinates } from "../../utils/coordinates";
-import { CoffeeShop } from "../DrawCoffeeShopcomponent";
+import { CoffeeShop } from "../DrawCoffeeShopComponent";
 
 let container = null;
 const shopsFetcher = shopsFetcherMock();
