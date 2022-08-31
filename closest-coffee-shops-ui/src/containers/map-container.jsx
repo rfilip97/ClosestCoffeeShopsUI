@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { CoffeeShop } from "../components/DrawCoffeeShopcomponent";
+import { CoffeeShop } from "../components/DrawCoffeeShopComponent";
 import Pointer from "../components/DrawPointerComponent";
 import Map from "../components/Map";
 import { useClosestCoffeeShops } from "../hooks/useCoffeeShops";
