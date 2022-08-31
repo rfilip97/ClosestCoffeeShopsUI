@@ -34,7 +34,6 @@ test("component uses the expected image", () => {
 
   const shopImage = screen.getByAltText("Coffee shop");
   expect(shopImage).toHaveAttribute("src", "cshop.png");
-  screen.debug();
 });
 
 test("shop image is drawn at the expected coordinates", () => {
@@ -49,7 +48,6 @@ test("shop image is drawn at the expected coordinates", () => {
   const shopImage = screen.getByAltText("Coffee shop");
   expect(shopImage).toHaveStyle(`left: ${expectedCoordsX}px`);
   expect(shopImage).toHaveStyle(`top: ${expectedCoordsY}px`);
-  screen.debug();
 });
 
 test("shop image has the expected size", () => {
@@ -61,7 +59,6 @@ test("shop image has the expected size", () => {
   const shopImage = screen.getByAltText("Coffee shop");
   expect(shopImage).toHaveStyle("height: 50px");
   expect(shopImage).toHaveStyle("width: 50px");
-  screen.debug();
 });
 
 test("component reacts to the highlighted prop", () => {
@@ -75,5 +72,4 @@ test("component reacts to the highlighted prop", () => {
 
   const shopImage = screen.getByAltText("Coffee shop");
   expect(shopImage).toHaveClass("-highlighted");
-  screen.debug();
 });
