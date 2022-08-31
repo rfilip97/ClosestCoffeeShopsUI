@@ -3,7 +3,7 @@ import { translateMapCoordinates } from "../utils/coordinates";
 
 import "../scss/pointer/_pointer.scss";
 
-function Pointer(props) {
+export function Pointer(props) {
   const shopSizePx = 50;
   const [newx, newy] = translateMapCoordinates(props.x, props.y);
   const initialStyle = {
