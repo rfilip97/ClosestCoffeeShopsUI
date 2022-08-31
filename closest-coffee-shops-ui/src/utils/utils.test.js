@@ -1,4 +1,4 @@
-import { translateMapCoordinates } from "./CoordinateConverter";
+import { translateMapCoordinates } from "./coordinates";
 
 describe("CoordinateConverter", () => {
   it("should never return negative coordinates", async () => {
