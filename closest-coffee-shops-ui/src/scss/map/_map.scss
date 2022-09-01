@@ -1,11 +1,11 @@
 @use "./mapConstants";
 
 .map {
-  height: mapConstants.$mapHeight;
   width: mapConstants.$mapWidth;
-  margin: auto;
+  height: mapConstants.$mapHeight;
 }
 
 .map-container {
   position: relative;
+  margin: mapConstants.$mapMargin;
 }

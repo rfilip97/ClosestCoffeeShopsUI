@@ -1,3 +1,9 @@
+import sizes from "../scss/map/_mapConstants.scss";
+
+const margin = viewportToPixels(sizes.mapMargin);
+const mapX = viewportToPixels(sizes.mapWidth);
+const mapY = viewportToPixels(sizes.mapHeight);
+
 /**
  * Translate real coordinates to map coordinates
  * @param {Number} x X coordinate
@@ -5,11 +11,12 @@
  * @returns the translated values
  */
 export function translateMapCoordinates(x, y) {
-  const translateCoord = (coord) => {
-    return (parseInt(coord) + 180) * 10;
+  const translate = (coord, mapSize) => {
+    const normalisedCoord = Number(coord) + 180;
+    return (normalisedCoord * mapSize) / 360;
   };
 
-  return [translateCoord(x), translateCoord(y)];
+  return [translate(x, mapX), translate(y, mapY)];
 }
 
 /**
@@ -19,24 +26,26 @@ export function translateMapCoordinates(x, y) {
  * @returns the translated values
  */
 export function reverseTranslateMapCoordinates(x, y) {
-  const revTranslateX = (coord) => {
-    return (parseInt(coord) / 10 - 180).toFixed(2);
+  const translate = (coord, mapSize) => {
+    const normalisedCoord = coord - margin;
+    const absval = (mapSize * normalisedCoord) / 360;
+    return absval.toFixed(2);
   };
 
-  const revTranslateY = (coord) => {
-    return (parseInt(coord) / 10 - 180).toFixed(2);
-  };
-
-  return [revTranslateX(x), revTranslateY(y)];
+  return [translate(x, mapX), translate(y, mapY)];
 }
 
 export const translateMouseCoordsToMapCoords = (event) => {
-  const absX = event.clientX - event.target.offsetLeft;
-  const absY = event.clientY - event.target.offsetTop;
+  const x = event.clientX - event.target.offsetLeft;
+  const y = event.clientY - event.target.offsetTop;
 
-  const [x, y] = reverseTranslateMapCoordinates(absX, absY);
+  const translate = (coord, mapSize) => {
+    const normalisedCoord = coord - margin;
+    const absVal = (360 * normalisedCoord) / mapSize;
+    return (absVal - 180).toFixed(2);
+  };
 
-  return { x, y };
+  return { x: translate(x, mapX), y: translate(y, mapY) };
 };
 
 export const translateMouseCoordsAndCall = (cb) => (event) => {
@@ -44,3 +53,11 @@ export const translateMouseCoordsAndCall = (cb) => (event) => {
 
   cb({ x, y });
 };
+
+function viewportToPixels(value) {
+  var parts = value.match(/([0-9\.]+)(vh|vw)/);
+  var q = Number(parts[1]);
+  var side =
+    window[["innerHeight", "innerWidth"][["vh", "vw"].indexOf(parts[2])]];
+  return Math.round(side * (q / 100));
+}

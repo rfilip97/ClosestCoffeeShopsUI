@@ -1,3 +1,9 @@
-$mapHeight: 3600px;
+$mapHeight: 90vh;
+$mapWidth: 75vw;
+$mapMargin: 5vh;
 
-$mapWidth: 3600px;
+:export {
+  mapHeight: $mapHeight;
+  mapWidth: $mapWidth;
+  mapMargin: $mapMargin;
+}
