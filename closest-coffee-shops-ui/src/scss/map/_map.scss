@@ -3,9 +3,12 @@
 .map {
   width: mapConstants.$mapWidth;
   height: mapConstants.$mapHeight;
+  position: absolute;
 }
 
 .map-container {
   position: relative;
   margin: mapConstants.$mapMargin;
+  width: mapConstants.$mapWidth;
+  height: mapConstants.$mapHeight;
 }

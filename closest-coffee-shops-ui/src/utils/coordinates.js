@@ -55,3 +55,13 @@ export const translateMouseCoordsAndCall = (cb) => (event) => {
 
   cb({ x, y });
 };
+
+export const pointPxToPercent = (pt) => {
+  const env = getEnvironment();
+
+  const pxToPercent = (px, mapPx) => {
+    return (px * 100) / mapPx;
+  };
+
+  return [pxToPercent(pt.x, env.mapX), pxToPercent(pt.y, env.mapY)];
+};

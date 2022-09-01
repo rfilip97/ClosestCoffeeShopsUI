@@ -1,6 +1,7 @@
 import coffeeShopImg from "../media/pictures/cshop.png";
 import { translateMapCoordinates } from "../utils/coordinates";
 import { ReactTooltipStyled } from "./ReactTooltipStyled";
+import { pointPxToPercent } from "../utils/coordinates";
 
 import "../scss/shop/_shop.scss";
 
@@ -8,9 +9,10 @@ export function CoffeeShop(props) {
   const shopSizePx = 50;
   const [newx, newy] = translateMapCoordinates(props.shop.x, props.shop.y);
 
+  const [percentX, percentY] = pointPxToPercent({ x: newx, y: newy });
   const elementStyle = {
-    top: `${newy}px`,
-    left: `${newx}px`,
+    top: `${percentY}%`,
+    left: `${percentX}%`,
     height: `${shopSizePx}px`,
     width: `${shopSizePx}px`,
   };
