@@ -6,7 +6,7 @@ import Map from "../components/Map";
 import { useClosestCoffeeShops } from "../hooks/useCoffeeShops";
 import { translateMouseCoordsAndCall } from "../utils/coordinates";
 
-function MapContainer(props) {
+export function MapContainer(props) {
   const [selectedPoint, setSelectedPoint] = useState(null);
 
   useClosestCoffeeShops(selectedPoint);
