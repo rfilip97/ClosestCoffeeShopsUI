@@ -6,15 +6,12 @@ import { pointPxToPercent } from "../utils/coordinates";
 import "../scss/shop/_shop.scss";
 
 export function CoffeeShop(props) {
-  const shopSizePx = 50;
   const [newx, newy] = translateMapCoordinates(props.shop.x, props.shop.y);
-
   const [percentX, percentY] = pointPxToPercent({ x: newx, y: newy });
+
   const elementStyle = {
     top: `${percentY}%`,
     left: `${percentX}%`,
-    height: `${shopSizePx}px`,
-    width: `${shopSizePx}px`,
   };
 
   return (

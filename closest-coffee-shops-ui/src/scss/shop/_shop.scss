@@ -1,7 +1,10 @@
 @use "./shopEffects";
+@use "./shopConstants";
 
 .shop {
   position: absolute;
+  height: shopConstants.$shopHeight;
+  width: shopConstants.$shopWidth;
 
   + .shop-tooltip {
     display: none;
