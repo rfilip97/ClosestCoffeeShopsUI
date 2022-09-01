@@ -1,8 +1,4 @@
-import sizes from "../scss/map/_mapConstants.scss";
-
-const margin = viewportToPixels(sizes.mapMargin);
-const mapX = viewportToPixels(sizes.mapWidth);
-const mapY = viewportToPixels(sizes.mapHeight);
+import { getEnvironment } from "./environment";
 
 /**
  * Translate real coordinates to map coordinates
@@ -11,12 +7,14 @@ const mapY = viewportToPixels(sizes.mapHeight);
  * @returns the translated values
  */
 export function translateMapCoordinates(x, y) {
+  const env = getEnvironment();
+
   const translate = (coord, mapSize) => {
     const normalisedCoord = Number(coord) + 180;
     return (normalisedCoord * mapSize) / 360;
   };
 
-  return [translate(x, mapX), translate(y, mapY)];
+  return [translate(x, env.mapX), translate(y, env.mapY)];
 }
 
 /**
@@ -26,26 +24,30 @@ export function translateMapCoordinates(x, y) {
  * @returns the translated values
  */
 export function reverseTranslateMapCoordinates(x, y) {
+  const env = getEnvironment();
+
   const translate = (coord, mapSize) => {
-    const normalisedCoord = coord - margin;
+    const normalisedCoord = coord - env.margin;
     const absval = (mapSize * normalisedCoord) / 360;
     return absval.toFixed(2);
   };
 
-  return [translate(x, mapX), translate(y, mapY)];
+  return [translate(x, env.mapX), translate(y, env.mapY)];
 }
 
 export const translateMouseCoordsToMapCoords = (event) => {
+  const env = getEnvironment();
+
   const x = event.clientX - event.target.offsetLeft;
   const y = event.clientY - event.target.offsetTop;
 
   const translate = (coord, mapSize) => {
-    const normalisedCoord = coord - margin;
+    const normalisedCoord = coord - env.margin;
     const absVal = (360 * normalisedCoord) / mapSize;
     return (absVal - 180).toFixed(2);
   };
 
-  return { x: translate(x, mapX), y: translate(y, mapY) };
+  return { x: translate(x, env.mapX), y: translate(y, env.mapY) };
 };
 
 export const translateMouseCoordsAndCall = (cb) => (event) => {
@@ -53,11 +55,3 @@ export const translateMouseCoordsAndCall = (cb) => (event) => {
 
   cb({ x, y });
 };
-
-function viewportToPixels(value) {
-  var parts = value.match(/([0-9\.]+)(vh|vw)/);
-  var q = Number(parts[1]);
-  var side =
-    window[["innerHeight", "innerWidth"][["vh", "vw"].indexOf(parts[2])]];
-  return Math.round(side * (q / 100));
-}
