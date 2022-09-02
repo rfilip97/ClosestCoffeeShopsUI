@@ -1,7 +1,6 @@
 @use "./coordsConstants";
 
 .coordinatesContainer {
-  padding: coordsConstants.$containerPadding;
   font-size: coordsConstants.$containerFontSize;
   position: absolute;
   right: 2vw;
