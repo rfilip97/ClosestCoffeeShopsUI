@@ -1,18 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
-import { setShops } from "../slices/shopSlice";
 import fetchCoffeeShops from "../services/closestCoffeeShops/dataFetcher/dataFetcher";
+import { setShops } from "../slices/shopSlice";
+import { isSuccessfullResponse } from "../utils/responseCodes";
 
 export function useShopsLoading() {
+  let [respCode, setRespCode] = useState(200);
+
   const dispatch = useDispatch();
   useEffect(() => {
     fetchCoffeeShops().then(([coffeeShops, responseCode]) => {
-      if (responseCode >= 200 && responseCode < 300) {
+      setRespCode(responseCode);
+      if (isSuccessfullResponse(responseCode)) {
         dispatch(setShops(coffeeShops));
-      } else {
-        alert("Error fetching the shops. ErrorCode: " + responseCode);
       }
     });
   }, []);
+
+  return respCode;
 }

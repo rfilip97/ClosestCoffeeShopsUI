@@ -1,21 +1,24 @@
+import { useShopsLoading } from "../hooks/useShopsLoading";
+import { isSuccessfullResponse } from "../utils/responseCodes";
+import { AppContent } from "./wrapperContent/AppContent";
+import { ErrorContent } from "./wrapperContent/ErrorContent";
+
 import "../scss//app/_app.scss";
 
-import { useState } from "react";
-import CoordinatesContainer from "../containers/coordinatesContainer";
-import MapContainer from "../containers/map-container";
-import { useShopsLoading } from "../hooks/useShopsLoading";
-
 function AppWrapper() {
-  useShopsLoading();
+  const responseCode = useShopsLoading();
 
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const App = (props) => {
+    const responseCode = props.responseCode;
 
-  return (
-    <div className="app">
-      <MapContainer setCoordsCb={setCoords} />
-      <CoordinatesContainer coords={coords} />
-    </div>
-  );
+    if (isSuccessfullResponse(responseCode)) {
+      return <AppContent />;
+    }
+
+    return <ErrorContent responseCode={responseCode} />;
+  };
+
+  return <App responseCode={responseCode} />;
 }
 
 export default AppWrapper;
