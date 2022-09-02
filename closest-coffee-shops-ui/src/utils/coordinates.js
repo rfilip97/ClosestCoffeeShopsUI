@@ -60,7 +60,7 @@ export const pointPxToPercent = (pt) => {
   const env = getEnvironment();
 
   const pxToPercent = (px, mapPx) => {
-    return (px * 100) / mapPx;
+    return ((px * 100) / mapPx).toFixed(2);
   };
 
   return [pxToPercent(pt.x, env.mapX), pxToPercent(pt.y, env.mapY)];
