@@ -5,7 +5,7 @@ import { setShops } from "../slices/shopSlice";
 import { isSuccessfullResponse } from "../utils/responseCodes";
 
 export function useShopsLoading() {
-  let [respCode, setRespCode] = useState(200);
+  let [respCode, setRespCode] = useState(null);
 
   const dispatch = useDispatch();
   useEffect(() => {
