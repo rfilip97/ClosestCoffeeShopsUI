@@ -9,9 +9,21 @@ const viewportToPixels = (value) => {
 };
 
 export const getEnvironment = () => {
+  const mapImage = document.getElementById("mapimage");
+
+  if (mapImage) {
+    const dims = mapImage.getBoundingClientRect();
+
+    return {
+      margin: dims.top,
+      mapX: dims.width,
+      mapY: dims.height,
+    };
+  }
+
   return {
-    margin: viewportToPixels(sizes.mapMargin),
-    mapX: viewportToPixels(sizes.mapWidth),
-    mapY: viewportToPixels(sizes.mapHeight),
+    margin: 0,
+    mapX: 0,
+    mapY: 0,
   };
 };
