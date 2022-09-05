@@ -14,8 +14,12 @@ export function CoffeeShop(props) {
     left: `${percentX}%`,
   };
 
+  const preventEvent = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div>
+    <div onMouseMove={preventEvent}>
       <img
         src={coffeeShopImg}
         className={`shop ${props.shop.highlighted ? "-highlighted" : ""}`}
