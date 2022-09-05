@@ -65,4 +65,12 @@ describe("render main component", () => {
     clickAndCheckChanges({ x: "11", y: "47" }, { x: "-172.80", y: "-102.77" });
     clickAndCheckChanges({ x: "279", y: "22" }, { x: "148.80", y: "-142.99" });
   });
+
+  it("clicks outside the map are ignored", () => {
+    mount(<App />);
+    cy.get("[data-testid='coordinatevalues']").should("have.text", "0 0");
+
+    cy.root().click(400, 400);
+    cy.get("[data-testid='coordinatevalues']").should("have.text", "0 0");
+  });
 });
