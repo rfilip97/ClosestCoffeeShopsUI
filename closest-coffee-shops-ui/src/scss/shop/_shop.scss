@@ -8,6 +8,13 @@
 
   + .shop-tooltip {
     display: none;
+    border-radius: 10vw !important;
+    height: 7% !important;
+    width: 25% !important;
+    font-size: 1.5vw !important;
+    text-align: center !important;
+    padding: 4vh 0vw 0vh !important;
+    margin: 4vh 0vw 0vh !important;
   }
 
   &:hover + .shop-tooltip {
