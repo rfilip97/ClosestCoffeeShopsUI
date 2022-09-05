@@ -5,7 +5,7 @@ function CoordinatesContainer(props) {
     <div className="coordinatesContainer">
       <h2>
         <p>Coords:</p>
-        <p>
+        <p data-testid="coordinatevalues">
           {props.coords.x} {props.coords.y}
         </p>
       </h2>
