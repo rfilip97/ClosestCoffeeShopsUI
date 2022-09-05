@@ -42,8 +42,8 @@ describe("render main component", () => {
       });
 
       cy.get("[data-testid='pointerimg']").should("have.length", "1");
-      cy.get("[data-testid='coffeeshopimg']").should("have.length", "6");
       cy.get("[data-testid='coffeeshopimg']")
+        .should("have.length", "6")
         .filter(".-highlighted")
         .should("have.length", "3");
     };
