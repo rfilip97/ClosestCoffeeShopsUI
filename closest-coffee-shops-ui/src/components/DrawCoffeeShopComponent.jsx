@@ -22,6 +22,7 @@ export function CoffeeShop(props) {
         alt="Coffee shop"
         style={elementStyle}
         data-tip={props.shop.name}
+        data-testid="coffeeshopimg"
       />
       <ReactTooltipStyled className="shop-tooltip" />
     </div>

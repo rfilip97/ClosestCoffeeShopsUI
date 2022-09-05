@@ -34,7 +34,7 @@ test("component uses the expected image", () => {
     container
   );
 
-  const shopImage = screen.getByAltText("Coffee shop");
+  const shopImage = screen.getByTestId("coffeeshopimg");
   expect(shopImage).toHaveAttribute("src", "cshop.png");
 });
 
@@ -42,20 +42,17 @@ test("shop image is drawn at the expected coordinates", () => {
   const shop = MOCKED_SHOPS_DATA[0];
   render(<CoffeeShop data-testid="coffeeShop" shop={shop} />, container);
 
-  const shopImage = screen.getByAltText("Coffee shop");
+  const shopImage = screen.getByTestId("coffeeshopimg");
   expect(shopImage).toHaveStyle(`left: 63.22%`);
   expect(shopImage).toHaveStyle(`top: 16.02%`);
 });
 
 test("component reacts to the highlighted prop", () => {
   render(
-    <CoffeeShop
-      data-testid="coffeeShop"
-      shop={{ ...MOCKED_SHOPS_DATA[0], highlighted: true }}
-    />,
+    <CoffeeShop shop={{ ...MOCKED_SHOPS_DATA[0], highlighted: true }} />,
     container
   );
 
-  const shopImage = screen.getByAltText("Coffee shop");
+  const shopImage = screen.getByTestId("coffeeshopimg");
   expect(shopImage).toHaveClass("-highlighted");
 });

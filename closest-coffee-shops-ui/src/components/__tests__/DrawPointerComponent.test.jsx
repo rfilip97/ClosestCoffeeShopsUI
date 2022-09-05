@@ -49,7 +49,7 @@ test("pointer is drawn at the expected coordinates using algorithm", () => {
 
     const [expectedX, expectedY] = mapTranslationAlg(pt);
 
-    const pointer = screen.getByAltText("Pointer");
+    const pointer = screen.getByTestId("pointerimg");
     expect(pointer).toHaveStyle(`left: ${expectedX}%`);
     expect(pointer).toHaveStyle(`top: ${expectedY}%`);
 
@@ -77,7 +77,7 @@ test("pointer is drawn at the expected coordinates using precalculated data", ()
     const expectedPt = expectedTranslatedPoints[i];
 
     render(<Pointer x={pt.x} y={pt.y} />, container);
-    const pointer = screen.getByAltText("Pointer");
+    const pointer = screen.getByTestId("pointerimg");
 
     expect(pointer).toHaveStyle(`left: ${expectedPt.x}%`);
     expect(pointer).toHaveStyle(`top: ${expectedPt.y}%`);

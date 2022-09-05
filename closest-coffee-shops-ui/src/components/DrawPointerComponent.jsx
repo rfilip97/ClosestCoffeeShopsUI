@@ -21,6 +21,7 @@ export function Pointer(props) {
       className="pointer"
       alt="Pointer"
       style={initialStyle}
+      data-testid="pointerimg"
     ></img>
   );
 }
