@@ -8,7 +8,7 @@ function Map(props) {
     <div className="map-container" onMouseMove={props.onMouseMove}>
       <img
         id="mapimage"
-        className={`map ${props.invisible ? "-invisible" : ""}`}
+        className={`map`}
         src={map}
         alt="Map"
         onClick={props.onClick}
