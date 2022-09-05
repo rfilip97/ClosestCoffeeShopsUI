@@ -5,8 +5,10 @@ import { shopsFetcherMock } from "../../mocks/shopsFetcherMock";
 import { translateMapCoordinates } from "../../utils/coordinates";
 import { CoffeeShop } from "../DrawCoffeeShopComponent";
 
-let container = null;
 const shopsFetcher = shopsFetcherMock();
+jest.mock("../../utils/environment");
+
+let container = null;
 beforeEach(() => {
   container = document.createElement("div");
   document.body.appendChild(container);
@@ -40,25 +42,9 @@ test("shop image is drawn at the expected coordinates", () => {
   const shop = MOCKED_SHOPS_DATA[0];
   render(<CoffeeShop data-testid="coffeeShop" shop={shop} />, container);
 
-  const [expectedCoordsX, expectedCoordsY] = translateMapCoordinates(
-    shop.x,
-    shop.y
-  );
-
   const shopImage = screen.getByAltText("Coffee shop");
-  expect(shopImage).toHaveStyle(`left: ${expectedCoordsX}px`);
-  expect(shopImage).toHaveStyle(`top: ${expectedCoordsY}px`);
-});
-
-test("shop image has the expected size", () => {
-  render(
-    <CoffeeShop data-testid="coffeeShop" shop={MOCKED_SHOPS_DATA[0]} />,
-    container
-  );
-
-  const shopImage = screen.getByAltText("Coffee shop");
-  expect(shopImage).toHaveStyle("height: 50px");
-  expect(shopImage).toHaveStyle("width: 50px");
+  expect(shopImage).toHaveStyle(`left: 63.22%`);
+  expect(shopImage).toHaveStyle(`top: 16.02%`);
 });
 
 test("component reacts to the highlighted prop", () => {
