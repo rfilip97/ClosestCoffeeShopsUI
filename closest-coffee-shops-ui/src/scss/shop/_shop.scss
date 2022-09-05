@@ -12,21 +12,21 @@
     text-align: center !important;
 
     @media only screen and (min-width: screen_sizes.$small) {
-      height: 10px !important;
-      width: 150px !important;
       font-size: 10px !important;
+      margin: 5px !important;
+      padding: 5px !important;
     }
 
     @media only screen and (min-width: screen_sizes.$medium) {
-      height: 15px !important;
-      width: 225px !important;
       font-size: 15px !important;
+      margin: 8px !important;
+      padding: 8px !important;
     }
 
     @media only screen and (min-width: screen_sizes.$large) {
-      height: 20px !important;
-      width: 350px !important;
       font-size: 20px !important;
+      margin: 15px !important;
+      padding: 15px !important;
     }
   }
 
