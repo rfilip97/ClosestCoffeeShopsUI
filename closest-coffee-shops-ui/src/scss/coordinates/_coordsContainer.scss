@@ -1,15 +1,24 @@
 @use "./coordsConstants";
+@use "../screens/screen_sizes";
 
 .coordinatesContainer {
-  position: absolute;
+  position: relative;
   top: 0vh;
-  right: 2vw;
-  width: 15vw;
-  height: 30vh;
+  padding-left: 20px;
 
   h2 {
     p {
-      font-size: 2vw;
+      @media only screen and (min-width: screen_sizes.$small) {
+        font-size: 20px;
+      }
+
+      @media only screen and (min-width: screen_sizes.$medium) {
+        font-size: 40px;
+      }
+
+      @media only screen and (min-width: screen_sizes.$large) {
+        font-size: 50px;
+      }
     }
   }
 }

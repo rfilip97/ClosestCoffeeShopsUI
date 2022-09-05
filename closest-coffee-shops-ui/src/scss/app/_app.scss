@@ -3,4 +3,5 @@
 .app {
   padding: appConstants.$padding;
   display: flex;
+  flex-wrap: wrap;
 }

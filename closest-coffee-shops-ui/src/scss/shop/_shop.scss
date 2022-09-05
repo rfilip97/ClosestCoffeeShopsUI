@@ -1,20 +1,33 @@
 @use "./shopEffects";
 @use "./shopConstants";
+@use "../screens/screen_sizes";
 
 .shop {
   position: absolute;
-  height: shopConstants.$shopHeight;
   width: shopConstants.$shopWidth;
 
   + .shop-tooltip {
     display: none;
-    border-radius: 10vw !important;
-    height: 7% !important;
-    width: 25% !important;
-    font-size: 1.5vw !important;
+    border-radius: 175px !important;
     text-align: center !important;
-    padding: 4vh 0vw 0vh !important;
-    margin: 4vh 0vw 0vh !important;
+
+    @media only screen and (min-width: screen_sizes.$small) {
+      height: 10px !important;
+      width: 150px !important;
+      font-size: 10px !important;
+    }
+
+    @media only screen and (min-width: screen_sizes.$medium) {
+      height: 15px !important;
+      width: 225px !important;
+      font-size: 15px !important;
+    }
+
+    @media only screen and (min-width: screen_sizes.$large) {
+      height: 20px !important;
+      width: 350px !important;
+      font-size: 20px !important;
+    }
   }
 
   &:hover + .shop-tooltip {
