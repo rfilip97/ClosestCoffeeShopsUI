@@ -24,10 +24,23 @@ describe("render main component", () => {
         }
       );
 
-      cy.get("[data-testid='coordinatevalues']").should(
-        "have.text",
-        `${expectedCoords.x} ${expectedCoords.y}`
-      );
+      // Clicked coordinates seem to have a precision of ~2. Thus, we will aproximate the resulted coord
+      cy.get("[data-testid='coordinatevalues']").should(($div) => {
+        const text = $div.text();
+        const [, x, y] = text.match(/^(-?\d+\.?\d+) (-?\d+\.?\d+)$/);
+
+        const areCloseNumbers = (nb1, nb2) => {
+          const treshold = 2;
+          nb1 = Number(nb1);
+          nb2 = Number(nb2);
+
+          return Math.abs(nb1 - nb2) < treshold;
+        };
+
+        expect(areCloseNumbers(x, expectedCoords.x)).to.be.true;
+        expect(areCloseNumbers(y, expectedCoords.y)).to.be.true;
+      });
+
       cy.get("[data-testid='pointerimg']").should("have.length", "1");
       cy.get("[data-testid='coffeeshopimg']").should("have.length", "6");
       cy.get("[data-testid='coffeeshopimg']")
