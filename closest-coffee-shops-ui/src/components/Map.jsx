@@ -12,6 +12,7 @@ function Map(props) {
         src={map}
         alt="Map"
         onClick={props.onClick}
+        data-testid="mapimg"
       />
       {props.children}
     </div>
