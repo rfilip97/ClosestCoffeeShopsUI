@@ -1,0 +1,42 @@
+@use "./shopEffects";
+@use "./shopConstants";
+@use "../screens/screen_sizes";
+
+.shop {
+  position: absolute;
+  width: shopConstants.$shopWidth;
+
+  + .shop-tooltip {
+    display: none;
+    border-radius: 175px !important;
+    text-align: center !important;
+
+    @media only screen and (min-width: screen_sizes.$small) {
+      font-size: 10px !important;
+      margin: 5px !important;
+      padding: 5px !important;
+    }
+
+    @media only screen and (min-width: screen_sizes.$medium) {
+      font-size: 15px !important;
+      margin: 8px !important;
+      padding: 8px !important;
+    }
+
+    @media only screen and (min-width: screen_sizes.$large) {
+      font-size: 20px !important;
+      margin: 15px !important;
+      padding: 15px !important;
+    }
+  }
+
+  &:hover + .shop-tooltip {
+    display: block;
+    border: none;
+  }
+
+  &.-highlighted {
+    @include shopEffects.upscaledShop();
+    @include shopEffects.markedShop();
+  }
+}

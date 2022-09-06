@@ -1,28 +1,12 @@
-import './App.css';
-
-import { getNearestShops } from "./services/closestCoffeeShops/app/app.js";
-import { RETRIEVE_ALL_TOKEN } from './services/closestCoffeeShops/utils/utils'
-import CoffeeShop from './components/DrawCoffeeShopcomponent';
-import Map from "./components/CanvasComponent"
-import React, { useState, useEffect } from 'react'
+import AppWrapper from "./components/AppWrapper";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 function App() {
-  const [shops, setShops] = useState([]);
-
-  useEffect(() => {
-    const loadPost = () => {
-      getNearestShops({ x: 1, y: 1 }, RETRIEVE_ALL_TOKEN).then(setShops);
-    }
-    loadPost();
-  }, []);
-
   return (
-    <div className="App">
-        <Map />
-        {shops.map(item => {
-          return <CoffeeShop key={`coffeshopitem-${item.name}`} x={item.x} y={item.y} />
-        })}
-    </div>
+    <Provider store={store}>
+      <AppWrapper />
+    </Provider>
   );
 }
 

@@ -1,0 +1,22 @@
+@use "../screens/screen_sizes";
+
+.map {
+  width: inherit;
+}
+
+.map-container {
+  position: relative;
+  margin: 10px 0px 0px 10px;
+
+  @media only screen and (min-width: screen_sizes.$small) {
+    width: 300px;
+  }
+
+  @media only screen and (min-width: screen_sizes.$medium) {
+    width: 700px;
+  }
+
+  @media only screen and (min-width: screen_sizes.$large) {
+    width: 1100px;
+  }
+}

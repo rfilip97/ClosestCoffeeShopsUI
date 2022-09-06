@@ -1,0 +1,8 @@
+@use "./pointerConstants";
+
+.pointer {
+  height: pointerConstants.$pointerHeight;
+  width: pointerConstants.$pointerWidth;
+  position: absolute;
+  transform: scale(pointerConstants.$scaleFactor);
+}
