@@ -17,7 +17,8 @@ export const getHighlightedShops = (shops, point) => {
 };
 
 export const getClosestCoffeShops = (coffeeShops, position, limit) => {
-  const sortedShops = coffeeShops
+  if (coffeeShops.length > 0) {
+    const sortedShops = coffeeShops
     .map((cs) => ({
       ...cs,
       delta: calculateDelta(cs, position),
@@ -25,6 +26,9 @@ export const getClosestCoffeShops = (coffeeShops, position, limit) => {
     .sort((cs1, cs2) => cs1.delta - cs2.delta);
 
   return typeof limit === "number" ? sortedShops.slice(0, limit) : sortedShops;
+  }
+
+  return coffeeShops;
 };
 
 export const getHighlightedSortedShopsRelativeTo = (point, shops) => {
