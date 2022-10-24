@@ -1,7 +1,5 @@
 import { ofType } from "redux-observable";
 import { map } from "rxjs/operators";
-import { setShops } from "../slices/shopSlice";
-import { store } from "../store";
 import { getHighlightedSortedShopsRelativeTo } from "../utils/shops";
 
 const updateShopsEpic = (action$, state) => {
@@ -13,10 +11,12 @@ const updateShopsEpic = (action$, state) => {
 
       if (shops) {
         const updatedShops = getHighlightedSortedShopsRelativeTo(point, shops);
-        store.dispatch(setShops(updatedShops));
-      }
 
-      action.type = "shops/setShopsComplete";
+        action.payload = updatedShops;
+        action.type = "shops/setShops";
+      } else {
+        action.type = "selectedPoint/setSelectedPointComplete";
+      }
 
       return action;
     })
