@@ -3,7 +3,7 @@ import { map } from "rxjs/operators";
 import { getHighlightedSortedShopsRelativeTo } from "../utils/shops";
 
 const updateShopsEpic = (action$, state) => {
-  const newAction$ = action$.pipe(
+  const updateShopsAction = action$.pipe(
     ofType("selectedPoint/setSelectedPoint"),
     map((action) => {
       const point = action.payload;
@@ -22,7 +22,7 @@ const updateShopsEpic = (action$, state) => {
     })
   );
 
-  return newAction$;
+  return updateShopsAction;
 };
 
 export default updateShopsEpic;
