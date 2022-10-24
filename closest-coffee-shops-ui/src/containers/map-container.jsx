@@ -3,13 +3,13 @@ import { useSelector } from "react-redux";
 import { CoffeeShop } from "../components/DrawCoffeeShopComponent";
 import Pointer from "../components/DrawPointerComponent";
 import Map from "../components/Map";
-import { useClosestCoffeeShops } from "../hooks/useCoffeeShops";
+import { useSelectedPoint } from "../hooks/useSelectedPoint";
 import { translateMouseCoordsAndCall } from "../utils/coordinates";
 
 export function MapContainer(props) {
   const [selectedPoint, setSelectedPoint] = useState(null);
 
-  useClosestCoffeeShops(selectedPoint);
+  useSelectedPoint(selectedPoint);
 
   const shops = useSelector((state) => state.shops.shops);
 
